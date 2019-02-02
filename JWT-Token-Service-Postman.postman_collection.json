@@ -1,0 +1,163 @@
+{
+	"variables": [],
+	"info": {
+		"name": "JWT-Token-Service-Postman",
+		"_postman_id": "52957264-1ac7-185f-b314-359b320f5cf8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OAuth-JWT-ClientCredentials",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8070/oauth/token?grant_type=client_credentials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YXNoaXNoOmFzaGlzaA==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Authorization header should be Basic Base64 of \"ashish:ashish\" where ashish is the client id and client secret in this case.\nBase 64 of ashish:ashish is YXNoaXNoOmFzaGlzaA=="
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth-JWT Password",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/oauth/token?grant_type=password&username=ashish&password=jwtpass",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "username",
+							"value": "ashish",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "password",
+							"value": "jwtpass",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YXNoaXNoOmFzaGlzaA==",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Authorization header should be Basic Base64 of \"ashish:ashish\" where ashish is the client id and client secret in this case.\nBase 64 of ashish:ashish is YXNoaXNoOmFzaGlzaA=="
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Service",
+			"request": {
+				"url": "http://localhost:8080/users/admin/ashish",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXNoaXNoIl0sInVzZXJfbmFtZSI6InJhamVzaCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1NDg5MjUxNDgsImF1dGhvcml0aWVzIjpbIlJPTEVfUEFSRU5UX1JFQUQiXSwianRpIjoiNDU4MDI4ODAtYjQ4Ni00OWMxLTlkMzgtODdjMjA5NGQ1MmJjIiwiY2xpZW50X2lkIjoiYXNoaXNoIn0.99wr6rK7Uui_SQcoKjvP2b1Eif4CrL0ZrQsJ4yNpzDA",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test-Service copy",
+			"request": {
+				"url": "http://localhost:8080/users/parent/ashish",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXNoaXNoIl0sInVzZXJfbmFtZSI6InJhamVzaCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE1NDg5MjUxNDgsImF1dGhvcml0aWVzIjpbIlJPTEVfUEFSRU5UX1JFQUQiXSwianRpIjoiNDU4MDI4ODAtYjQ4Ni00OWMxLTlkMzgtODdjMjA5NGQ1MmJjIiwiY2xpZW50X2lkIjoiYXNoaXNoIn0.99wr6rK7Uui_SQcoKjvP2b1Eif4CrL0ZrQsJ4yNpzDA",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
