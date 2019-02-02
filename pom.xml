@@ -23,7 +23,7 @@
 		<!-- JWT TOKEN START -->
 		<dependency>
 			<groupId>com.ashish.jwt.token</groupId>
-			<artifactId>login-jwt</artifactId>
+			<artifactId>cactusschool-login-jwt</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<!-- JWT Token END -->
