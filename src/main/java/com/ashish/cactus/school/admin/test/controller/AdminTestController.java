@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.test.controller;
+package com.ashish.cactus.school.admin.test.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ashish.jwt.token.db.model.User;
-import com.ashish.jwt.token.services.AppUserService;
+import com.ashish.cactus.school.admin.db.model.AdminUser;
+import com.ashish.cactus.school.admin.services.AdminApplicationUserService;
 
 @RestController
-@RequestMapping("/users")
-public class TestController {
+@RequestMapping("/admin")
+public class AdminTestController {
 	
 	@Autowired()
-	@Qualifier("AppUserService")
-	private AppUserService appUserService;
+	@Qualifier("AdminApplicationUserService")
+	private AdminApplicationUserService appUserService;
 	
 
 	@RequestMapping(value="/admin/{username}", method=RequestMethod.GET)
 //	@PreAuthorize("hasAuthority('ROLE_ADMIN_CREATE')")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN_CREATE','ROLE_ADMIN_READ')")
 	public String getMessage(@PathVariable("username") String username) {
-		return username;
+		return appUserService.findByUsername(username).getPassword();
 	}
 	
 	@RequestMapping(value="/parent/{username}", method=RequestMethod.GET)

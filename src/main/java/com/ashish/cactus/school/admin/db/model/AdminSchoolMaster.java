@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.db.model;
+package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 @Entity
 @Table(name="school_master")
-@NamedQuery(name="SchoolMaster.findAll", query="SELECT s FROM SchoolMaster s")
+@NamedQuery(name="AdminSchoolMaster.findAll", query="SELECT s FROM AdminSchoolMaster s")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class SchoolMaster implements Serializable {
+public class AdminSchoolMaster implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -73,9 +73,9 @@ public class SchoolMaster implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
-	private List<Address> addresses;
+	private List<AdminAddress> addresses;
 
-	public SchoolMaster() {
+	public AdminSchoolMaster() {
 	}
 
 	public int getSchoolId() {
@@ -206,22 +206,22 @@ public class SchoolMaster implements Serializable {
 		this.updateUser = updateUser;
 	}
 
-	public List<Address> getAddresses() {
+	public List<AdminAddress> getAddresses() {
 		return this.addresses;
 	}
 
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(List<AdminAddress> addresses) {
 		this.addresses = addresses;
 	}
 
-	public Address addAddress(Address address) {
+	public AdminAddress addAddress(AdminAddress address) {
 		getAddresses().add(address);
 		address.setSchoolMaster(this);
 
 		return address;
 	}
 
-	public Address removeAddress(Address address) {
+	public AdminAddress removeAddress(AdminAddress address) {
 		getAddresses().remove(address);
 		address.setSchoolMaster(null);
 

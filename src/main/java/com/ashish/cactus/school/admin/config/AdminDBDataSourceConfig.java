@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.config;
+package com.ashish.cactus.school.admin.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableAutoConfiguration
 //@EnableTransactionManagement
-@EntityScan("com.ashish.jwt.token.db.model")
-@EnableJpaRepositories(basePackages = "com.ashish.jwt.token.db.repositories")
-public class DBDataSourceConfig {
+@EntityScan("com.ashish.cactus.school.admin.db.model")
+@EnableJpaRepositories(basePackages = "com.ashish.cactus.school.admin.db.repositories")
+public class AdminDBDataSourceConfig {
 
 	/*
 	 * @Bean(name = "msdatasource") public DataSource dataSource() {

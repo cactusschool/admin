@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.config;
+package com.ashish.cactus.school.admin.config;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Aspect
-public class LoggingAspect {
+public class AdminLoggingAspect {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 //	@Around("execution(* com.ashish.poc.services..*(..)) || "

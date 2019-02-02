@@ -9,8 +9,8 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ashish.jwt.token</groupId>
-	<artifactId>adminms</artifactId>
+	<groupId>com.ashish.cactus.school.admin</groupId>
+	<artifactId>cactusschool-adminms</artifactId>
 	<version>1.0</version>
 	<name>Admin Microservices</name>
 	<description>Demo project for Spring Boot</description>
@@ -20,6 +20,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- JWT TOKEN START -->
+		<dependency>
+			<groupId>com.ashish.jwt.token</groupId>
+			<artifactId>login-jwt</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- JWT Token END -->
 		<!-- Mandatory dependency START -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

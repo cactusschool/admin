@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.db.model;
+package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,9 +24,9 @@ import org.hibernate.annotations.Where;
  */
 @Entity
 @Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name="AdminUser.findAll", query="SELECT u FROM AdminUser u")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class User implements Serializable {
+public class AdminUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -81,13 +81,9 @@ public class User implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="user", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
-	private List<Address> addresses;
+	private List<AdminAddress> addresses;
 
-	//bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy="user", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.EAGER)
-	private List<UserRole> userRoles;
-
-	public User() {
+	public AdminUser() {
 	}
 
 	public int getUserId() {
@@ -218,48 +214,26 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	public List<Address> getAddresses() {
+	public List<AdminAddress> getAddresses() {
 		return this.addresses;
 	}
 
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(List<AdminAddress> addresses) {
 		this.addresses = addresses;
 	}
 
-	public Address addAddress(Address address) {
+	public AdminAddress addAddress(AdminAddress address) {
 		getAddresses().add(address);
 		address.setUser(this);
 
 		return address;
 	}
 
-	public Address removeAddress(Address address) {
+	public AdminAddress removeAddress(AdminAddress address) {
 		getAddresses().remove(address);
 		address.setUser(null);
 
 		return address;
-	}
-
-	public List<UserRole> getUserRoles() {
-		return this.userRoles;
-	}
-
-	public void setUserRoles(List<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
-
-	public UserRole addUserRole(UserRole userRole) {
-		getUserRoles().add(userRole);
-		userRole.setUser(this);
-
-		return userRole;
-	}
-
-	public UserRole removeUserRole(UserRole userRole) {
-		getUserRoles().remove(userRole);
-		userRole.setUser(null);
-
-		return userRole;
 	}
 
 }

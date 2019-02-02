@@ -1,4 +1,4 @@
-package com.ashish.jwt.token.db.model;
+package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
 
@@ -15,9 +15,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="address")
-@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
+@NamedQuery(name="AdminAddress.findAll", query="SELECT a FROM AdminAddress a")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class Address implements Serializable {
+public class AdminAddress implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -73,14 +73,14 @@ public class Address implements Serializable {
 	//bi-directional many-to-one association to SchoolMaster
 	@ManyToOne
 	@JoinColumn(name="school_id", nullable=false)
-	private SchoolMaster schoolMaster;
+	private AdminSchoolMaster schoolMaster;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
-	private User user;
+	private AdminUser user;
 
-	public Address() {
+	public AdminAddress() {
 	}
 
 	public int getAddressId() {
@@ -211,19 +211,19 @@ public class Address implements Serializable {
 		this.updateUser = updateUser;
 	}
 
-	public SchoolMaster getSchoolMaster() {
+	public AdminSchoolMaster getSchoolMaster() {
 		return this.schoolMaster;
 	}
 
-	public void setSchoolMaster(SchoolMaster schoolMaster) {
+	public void setSchoolMaster(AdminSchoolMaster schoolMaster) {
 		this.schoolMaster = schoolMaster;
 	}
 
-	public User getUser() {
+	public AdminUser getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(AdminUser user) {
 		this.user = user;
 	}
 
