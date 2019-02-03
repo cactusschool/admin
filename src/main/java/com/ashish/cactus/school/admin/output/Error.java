@@ -10,6 +10,8 @@ public class Error {
 	@ApiModelProperty(position=2, value="")
 	private String errorDesc;
 	@ApiModelProperty(position=3, value="")
+	private String developerMsg;
+	@ApiModelProperty(position=4, value="")
 	private List<ErrorInfo> errorInfoList;
 	public String getErrorCode() {
 		return errorCode;
@@ -28,5 +30,11 @@ public class Error {
 	}
 	public void setErrorInfoList(List<ErrorInfo> errorInfoList) {
 		this.errorInfoList = errorInfoList;
+	}
+	public String getDeveloperMsg() {
+		return developerMsg;
+	}
+	public void setDeveloperMsg(String developerMsg) {
+		this.developerMsg = developerMsg;
 	}
 }
