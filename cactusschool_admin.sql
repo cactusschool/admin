@@ -76,6 +76,29 @@ CREATE TABLE IF NOT EXISTS `license_details` (
 /*!40000 ALTER TABLE `license_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `license_details` ENABLE KEYS */;
 
+-- Dumping structure for table cactusschool_admin.location_master
+DROP TABLE IF EXISTS `location_master`;
+CREATE TABLE IF NOT EXISTS `location_master` (
+  `location_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dist_code` varchar(5) NOT NULL,
+  `district_name` varchar(20) NOT NULL,
+  `state_code` varchar(5) NOT NULL,
+  `state_name` varchar(20) NOT NULL,
+  `country_code` varchar(5) NOT NULL,
+  `country_name` varchar(20) NOT NULL,
+  `delete_ind` varchar(2) DEFAULT NULL,
+  `delete_reason` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `update_user` varchar(50) DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`location_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cactusschool_admin.location_master: ~0 rows (approximately)
+/*!40000 ALTER TABLE `location_master` DISABLE KEYS */;
+/*!40000 ALTER TABLE `location_master` ENABLE KEYS */;
+
 -- Dumping structure for table cactusschool_admin.modules_permission
 DROP TABLE IF EXISTS `modules_permission`;
 CREATE TABLE IF NOT EXISTS `modules_permission` (
