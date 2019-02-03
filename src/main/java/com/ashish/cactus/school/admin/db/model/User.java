@@ -83,6 +83,10 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
 	private List<Address> addresses;
 
+	//bi-directional many-to-one association to SchoolUser
+	@OneToMany(mappedBy="user")
+	private List<SchoolUser> schoolUsers;
+
 	public User() {
 	}
 
@@ -234,6 +238,28 @@ public class User implements Serializable {
 		address.setUser(null);
 
 		return address;
+	}
+
+	public List<SchoolUser> getSchoolUsers() {
+		return this.schoolUsers;
+	}
+
+	public void setSchoolUsers(List<SchoolUser> schoolUsers) {
+		this.schoolUsers = schoolUsers;
+	}
+
+	public SchoolUser addSchoolUser(SchoolUser schoolUser) {
+		getSchoolUsers().add(schoolUser);
+		schoolUser.setUser(this);
+
+		return schoolUser;
+	}
+
+	public SchoolUser removeSchoolUser(SchoolUser schoolUser) {
+		getSchoolUsers().remove(schoolUser);
+		schoolUser.setUser(null);
+
+		return schoolUser;
 	}
 
 }
