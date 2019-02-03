@@ -49,6 +49,79 @@ CREATE TABLE IF NOT EXISTS `address` (
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
+-- Dumping structure for table cactusschool_admin.license_details
+DROP TABLE IF EXISTS `license_details`;
+CREATE TABLE IF NOT EXISTS `license_details` (
+  `license_id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `payment_needed` varchar(2) DEFAULT NULL COMMENT 'Payment is needed only for school, parents and students. Fore teacher, school pays the subscription fees',
+  `start_date` timestamp NULL DEFAULT NULL,
+  `end_date` timestamp NULL DEFAULT NULL,
+  `subscription_fees` double DEFAULT NULL,
+  `delete_ind` varchar(2) DEFAULT NULL,
+  `delete_reason` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `update_user` varchar(50) DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`license_id`),
+  KEY `FK_license_details_school_master` (`school_id`),
+  KEY `FK_license_details_users` (`user_id`),
+  CONSTRAINT `FK_license_details_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
+  CONSTRAINT `FK_license_details_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cactusschool_admin.license_details: ~0 rows (approximately)
+/*!40000 ALTER TABLE `license_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `license_details` ENABLE KEYS */;
+
+-- Dumping structure for table cactusschool_admin.modules_permission
+DROP TABLE IF EXISTS `modules_permission`;
+CREATE TABLE IF NOT EXISTS `modules_permission` (
+  `school_module_id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `module_id` int(11) NOT NULL,
+  `delete_ind` varchar(2) DEFAULT NULL,
+  `delete_reason` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `update_user` varchar(50) DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`school_module_id`),
+  KEY `FK_modules_permission_school_master` (`school_id`),
+  KEY `FK_modules_permission_users` (`user_id`),
+  KEY `FK_modules_permission_module_master` (`module_id`),
+  CONSTRAINT `FK_modules_permission_module_master` FOREIGN KEY (`module_id`) REFERENCES `module_master` (`module_id`),
+  CONSTRAINT `FK_modules_permission_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
+  CONSTRAINT `FK_modules_permission_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cactusschool_admin.modules_permission: ~0 rows (approximately)
+/*!40000 ALTER TABLE `modules_permission` DISABLE KEYS */;
+/*!40000 ALTER TABLE `modules_permission` ENABLE KEYS */;
+
+-- Dumping structure for table cactusschool_admin.module_master
+DROP TABLE IF EXISTS `module_master`;
+CREATE TABLE IF NOT EXISTS `module_master` (
+  `module_id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(50) NOT NULL,
+  `module_feature` varchar(50) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `delete_ind` varchar(2) DEFAULT NULL,
+  `delete_reason` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `update_user` varchar(50) DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`module_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cactusschool_admin.module_master: ~0 rows (approximately)
+/*!40000 ALTER TABLE `module_master` DISABLE KEYS */;
+/*!40000 ALTER TABLE `module_master` ENABLE KEYS */;
+
 -- Dumping structure for table cactusschool_admin.role_access
 DROP TABLE IF EXISTS `role_access`;
 CREATE TABLE IF NOT EXISTS `role_access` (
@@ -124,15 +197,17 @@ CREATE TABLE IF NOT EXISTS `school_master` (
   `update_user` varchar(100) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.school_master: ~4 rows (approximately)
+-- Dumping data for table cactusschool_admin.school_master: ~6 rows (approximately)
 /*!40000 ALTER TABLE `school_master` DISABLE KEYS */;
 INSERT INTO `school_master` (`school_id`, `school_parent_id`, `school_group_name`, `school_name`, `address_id`, `context_root`, `db_name`, `school_code`, `sms_sender_id`, `contract_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(1, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(2, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(3, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(4, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL);
+	(4, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(6, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, 0, '', 'Test', 0, 'test', 'test', '100101', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `school_master` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.school_users
