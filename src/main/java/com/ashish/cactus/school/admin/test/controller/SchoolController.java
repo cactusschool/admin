@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ashish.cactus.school.admin.input.AdminInput;
 import com.ashish.cactus.school.admin.output.AdminOutput;
+import com.ashish.cactus.school.admin.services.SchoolService;
 
 @RestController
 @RequestMapping("/")
 public class SchoolController {
 	
+	@Autowired
+	private SchoolService schoolService;
 	@ApiOperation(value="Create new school",
 				notes="Create new school",
 				response=AdminOutput.class
@@ -49,7 +53,6 @@ public class SchoolController {
 			@RequestBody AdminInput adminInput
 			
 			) {
-		AdminOutput response = new AdminOutput();
-		return response;
+		return schoolService.createSchool(adminInput, transactionId);
 	}
 }

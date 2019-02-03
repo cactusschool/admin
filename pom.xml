@@ -48,6 +48,12 @@
 		</dependency>
 		<!-- Database Dependency END -->
 
+		<dependency>
+		    <groupId>net.sf.dozer</groupId>
+		    <artifactId>dozer</artifactId>
+		    <version>5.5.1</version>
+		</dependency>
+
 		<!-- Debugging and testing dependencies START -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
