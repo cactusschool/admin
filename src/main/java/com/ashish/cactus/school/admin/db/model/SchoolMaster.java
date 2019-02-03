@@ -16,9 +16,9 @@ import java.util.List;
  */
 @Entity
 @Table(name="school_master")
-@NamedQuery(name="AdminSchoolMaster.findAll", query="SELECT s FROM AdminSchoolMaster s")
+@NamedQuery(name="SchoolMaster.findAll", query="SELECT s FROM SchoolMaster s")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class AdminSchoolMaster implements Serializable {
+public class SchoolMaster implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -73,9 +73,9 @@ public class AdminSchoolMaster implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
-	private List<AdminAddress> addresses;
+	private List<Address> addresses;
 
-	public AdminSchoolMaster() {
+	public SchoolMaster() {
 	}
 
 	public int getSchoolId() {
@@ -206,22 +206,22 @@ public class AdminSchoolMaster implements Serializable {
 		this.updateUser = updateUser;
 	}
 
-	public List<AdminAddress> getAddresses() {
+	public List<Address> getAddresses() {
 		return this.addresses;
 	}
 
-	public void setAddresses(List<AdminAddress> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 
-	public AdminAddress addAddress(AdminAddress address) {
+	public Address addAddress(Address address) {
 		getAddresses().add(address);
 		address.setSchoolMaster(this);
 
 		return address;
 	}
 
-	public AdminAddress removeAddress(AdminAddress address) {
+	public Address removeAddress(Address address) {
 		getAddresses().remove(address);
 		address.setSchoolMaster(null);
 

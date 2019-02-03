@@ -15,9 +15,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="address")
-@NamedQuery(name="AdminAddress.findAll", query="SELECT a FROM AdminAddress a")
+@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class AdminAddress implements Serializable {
+public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -73,14 +73,14 @@ public class AdminAddress implements Serializable {
 	//bi-directional many-to-one association to SchoolMaster
 	@ManyToOne
 	@JoinColumn(name="school_id", nullable=false)
-	private AdminSchoolMaster schoolMaster;
+	private SchoolMaster schoolMaster;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
-	private AdminUser user;
+	private User user;
 
-	public AdminAddress() {
+	public Address() {
 	}
 
 	public int getAddressId() {
@@ -211,19 +211,19 @@ public class AdminAddress implements Serializable {
 		this.updateUser = updateUser;
 	}
 
-	public AdminSchoolMaster getSchoolMaster() {
+	public SchoolMaster getSchoolMaster() {
 		return this.schoolMaster;
 	}
 
-	public void setSchoolMaster(AdminSchoolMaster schoolMaster) {
+	public void setSchoolMaster(SchoolMaster schoolMaster) {
 		this.schoolMaster = schoolMaster;
 	}
 
-	public AdminUser getUser() {
+	public User getUser() {
 		return this.user;
 	}
 
-	public void setUser(AdminUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

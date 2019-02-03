@@ -24,9 +24,9 @@ import org.hibernate.annotations.Where;
  */
 @Entity
 @Table(name="users")
-@NamedQuery(name="AdminUser.findAll", query="SELECT u FROM AdminUser u")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 @Where(clause="delete_ind is NULL or delete_ind='N'")
-public class AdminUser implements Serializable {
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -81,9 +81,9 @@ public class AdminUser implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="user", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
-	private List<AdminAddress> addresses;
+	private List<Address> addresses;
 
-	public AdminUser() {
+	public User() {
 	}
 
 	public int getUserId() {
@@ -214,22 +214,22 @@ public class AdminUser implements Serializable {
 		this.userName = userName;
 	}
 
-	public List<AdminAddress> getAddresses() {
+	public List<Address> getAddresses() {
 		return this.addresses;
 	}
 
-	public void setAddresses(List<AdminAddress> addresses) {
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 
-	public AdminAddress addAddress(AdminAddress address) {
+	public Address addAddress(Address address) {
 		getAddresses().add(address);
 		address.setUser(this);
 
 		return address;
 	}
 
-	public AdminAddress removeAddress(AdminAddress address) {
+	public Address removeAddress(Address address) {
 		getAddresses().remove(address);
 		address.setUser(null);
 
