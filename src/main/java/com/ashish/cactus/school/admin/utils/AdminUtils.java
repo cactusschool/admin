@@ -8,6 +8,7 @@ import com.ashish.cactus.school.admin.output.AdminOutput;
 @Component
 public class AdminUtils {
 	public void mapError(AdminOutput output, String errorCode, Exception e) {
+		output.setStatusCode(errorCode);
 		com.ashish.cactus.school.admin.output.Error error = new com.ashish.cactus.school.admin.output.Error();
 		output.setError(error);
 		error.setErrorCode(errorCode);

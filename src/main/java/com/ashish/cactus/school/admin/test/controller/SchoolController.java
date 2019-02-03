@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,8 @@ import com.ashish.cactus.school.admin.services.SchoolService;
 @RestController
 @RequestMapping("/")
 public class SchoolController {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SchoolService schoolService;
@@ -53,6 +57,12 @@ public class SchoolController {
 			@RequestBody AdminInput adminInput
 			
 			) {
-		return schoolService.createSchool(adminInput, transactionId);
+		AdminOutput response = new AdminOutput();
+		try {
+			response = schoolService.createSchool(adminInput, response, transactionId);
+		} catch (Exception e) {
+			logger.error("Operation failed: Error message: ", e);
+		}
+		return response;
 	}
 }

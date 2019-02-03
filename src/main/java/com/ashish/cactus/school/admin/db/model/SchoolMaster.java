@@ -1,13 +1,21 @@
 package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
-import org.hibernate.annotations.Where;
-
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Where;
 
 
 /**
@@ -79,6 +87,10 @@ public class SchoolMaster implements Serializable {
 	@OneToMany(mappedBy="schoolMaster")
 	private List<SchoolUser> schoolUsers;
 
+	//bi-directional many-to-one association to ModulesPermission
+	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+	private List<ModulesPermission> modulesPermissions;
+		
 	public SchoolMaster() {
 	}
 
@@ -254,4 +266,25 @@ public class SchoolMaster implements Serializable {
 		return schoolUser;
 	}
 
+	public List<ModulesPermission> getModulesPermissions() {
+		return this.modulesPermissions;
+	}
+
+	public void setModulesPermissions(List<ModulesPermission> modulesPermissions) {
+		this.modulesPermissions = modulesPermissions;
+	}
+
+	public ModulesPermission addModulesPermission(ModulesPermission modulesPermission) {
+		getModulesPermissions().add(modulesPermission);
+		modulesPermission.setSchoolMaster(this);
+
+		return modulesPermission;
+	}
+
+	public ModulesPermission removeModulesPermission(ModulesPermission modulesPermission) {
+		getModulesPermissions().remove(modulesPermission);
+		modulesPermission.setSchoolMaster(null);
+
+		return modulesPermission;
+	}
 }

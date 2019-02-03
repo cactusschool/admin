@@ -26,8 +26,10 @@ public class SchoolDetails {
 	@ApiModelProperty(position=10, value="")
 	private List<UserDetails> users;
 	@ApiModelProperty(position=11, value="")
-	private DeleteDetails deleteDetails;
+	private List<ModuleDetails> modules;
 	@ApiModelProperty(position=12, value="")
+	private DeleteDetails deleteDetails;
+	@ApiModelProperty(position=13, value="")
 	private AuditDetails auditDetails;
 	
 	
@@ -102,5 +104,11 @@ public class SchoolDetails {
 	}
 	public void setUsers(List<UserDetails> users) {
 		this.users = users;
+	}
+	public List<ModuleDetails> getModules() {
+		return modules;
+	}
+	public void setModules(List<ModuleDetails> modules) {
+		this.modules = modules;
 	}
 }

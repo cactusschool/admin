@@ -1,15 +1,27 @@
 package com.ashish.cactus.school.admin.input;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class AddressDetails {
+	@ApiModelProperty(position=1, value="")
 	private int addressId;
+	@ApiModelProperty(position=2, value="")
 	private String addressLine1;
+	@ApiModelProperty(position=3, value="")
 	private String addressLine2;
+	@ApiModelProperty(position=4, value="")
 	private String addressLine3;
+	@ApiModelProperty(position=5, value="")
 	private String city;
+	@ApiModelProperty(position=6, value="")
 	private String distCode;
+	@ApiModelProperty(position=7, value="")
 	private String stateCode;
+	@ApiModelProperty(position=8, value="")
 	private String countryCode;
+	@ApiModelProperty(position=9, value="")
 	private DeleteDetails deleteDetails;
+	@ApiModelProperty(position=10, value="")
 	private AuditDetails auditDetails;
 	public int getAddressId() {
 		return addressId;
