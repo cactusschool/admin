@@ -100,24 +100,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- Below code creates 2 jars, "jwt-token-service-1.0-exec.jar" big 
-					in size, "jwt-token-service-1.0.jar.jar" small in size (we can use this as 
-					dependency with other applications -->
-				<executions>
-					<execution>
-						<goals>
-							<goal>
-								repackage
-							</goal>
-						</goals>
-						<configuration>
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
-				</executions>
-				<!-- Above code creates 2 jars, "jwt-token-service-1.0-exec.jar" big 
-					in size, "jwt-token-service-1.0.jar.jar" small in size (we can use this as 
-					dependency with other applications -->
 			</plugin>
 		</plugins>
 	</build>
