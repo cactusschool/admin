@@ -1,11 +1,24 @@
 package com.ashish.cactus.school.admin.input;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class AuditDetails {
+	@ApiModelProperty(position=1, value="")
 	private String createUser;
+	
+	@ApiModelProperty(position=2, value="")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
+	
+	@ApiModelProperty(position=3, value="")
 	private String updateUser;
+	
+	@ApiModelProperty(position=4, value="")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date updateDate;
 	public String getCreateUser() {
 		return createUser;

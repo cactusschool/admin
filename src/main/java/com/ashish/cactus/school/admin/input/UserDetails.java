@@ -8,34 +8,49 @@ import java.util.List;
 public class UserDetails {
 	@ApiModelProperty(position=1, value="")
 	private int userId;
+	
 	@ApiModelProperty(position=2, value="")
 	private int parentId;
+	
 	@ApiModelProperty(position=3, value="")
 	private String userName;
+	
 	@ApiModelProperty(position=4, value="")
 	private String password;
+	
 	@ApiModelProperty(position=5, value="")
 	private String firstName;
+	
 	@ApiModelProperty(position=6, value="")
 	private String middleName;
+	
 	@ApiModelProperty(position=7, value="")
 	private String lastName;
+	
 	@ApiModelProperty(position=8, value="")
 	private String accountLocked;
+	
 	@ApiModelProperty(position=9, value="")
 	private Date endDate;
+	
 	@ApiModelProperty(position=10, value="")
 	private Date lastLoggedIn;
+	
 	@ApiModelProperty(position=11, value="")
 	private List<RoleDetails> roles;
+	
 	@ApiModelProperty(position=12, value="")
 	private List<SchoolDetails> schools;
+	
 	@ApiModelProperty(position=13, value="")
 	private AddressDetails addressDetails;
+	
 	@ApiModelProperty(position=14, value="")
-	private DeleteDetails deleteDetails;
-	@ApiModelProperty(position=15, value="")
-	private AuditDetails auditDetails;
+	private LicenseDetails licenseDetails;
+	
+	@ApiModelProperty(position=11, value="")
+	private List<ModuleDetails> modules;
+
 	public int getUserId() {
 		return userId;
 	}
@@ -114,16 +129,29 @@ public class UserDetails {
 	public void setAddressDetails(AddressDetails addressDetails) {
 		this.addressDetails = addressDetails;
 	}
-	public DeleteDetails getDeleteDetails() {
-		return deleteDetails;
+	public LicenseDetails getLicenseDetails() {
+		return licenseDetails;
 	}
-	public void setDeleteDetails(DeleteDetails deleteDetails) {
-		this.deleteDetails = deleteDetails;
+	
+	public List<ModuleDetails> getModules() {
+		return modules;
 	}
-	public AuditDetails getAuditDetails() {
-		return auditDetails;
+	public void setModules(List<ModuleDetails> modules) {
+		this.modules = modules;
 	}
-	public void setAuditDetails(AuditDetails auditDetails) {
-		this.auditDetails = auditDetails;
+	
+	@Override
+	public String toString() {
+		return "UserDetails [userId=" + userId + ", parentId=" + parentId
+				+ ", userName=" + userName + ", password=" + password
+				+ ", firstName=" + firstName + ", middleName=" + middleName
+				+ ", lastName=" + lastName + ", accountLocked=" + accountLocked
+				+ ", endDate=" + endDate + ", lastLoggedIn=" + lastLoggedIn
+				+ ", roles=" + roles + ", schools=" + schools
+				+ ", addressDetails=" + addressDetails + ", licenseDetails="
+				+ licenseDetails + "]";
+	}
+	public void setLicenseDetails(LicenseDetails licenseDetails) {
+		this.licenseDetails = licenseDetails;
 	}
 }

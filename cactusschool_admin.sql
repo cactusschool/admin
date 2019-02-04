@@ -21,9 +21,9 @@ USE `cactusschool_admin`;
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
-  `school_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `address_name` varchar(100) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `address_name` varchar(100) DEFAULT NULL,
   `address_line1` varchar(75) NOT NULL,
   `address_line2` varchar(75) DEFAULT NULL,
   `address_line3` varchar(75) DEFAULT NULL,
@@ -43,10 +43,23 @@ CREATE TABLE IF NOT EXISTS `address` (
   KEY `FK_address_users` (`user_id`),
   CONSTRAINT `FK_address_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
   CONSTRAINT `FK_address_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.address: ~0 rows (approximately)
+-- Dumping data for table cactusschool_admin.address: ~12 rows (approximately)
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` (`address_id`, `school_id`, `user_id`, `address_name`, `address_line1`, `address_line2`, `address_line3`, `city`, `pin_code`, `dist_code`, `state_code`, `country_code`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(2, 8, NULL, NULL, 'Queen Palace, Kalipur Check Post', '', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, NULL, NULL, NULL, NULL),
+	(9, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', '', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', NULL, NULL, 'ashish', '2019-02-03 22:58:38'),
+	(10, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', '', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', NULL, NULL, 'ashish', '2019-02-03 22:58:38'),
+	(11, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', NULL, NULL, 'ashish', '2019-02-03 22:58:38'),
+	(14, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(15, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(16, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(17, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(23, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(24, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(33, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(34, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.license_details
@@ -80,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `license_details` (
 DROP TABLE IF EXISTS `location_master`;
 CREATE TABLE IF NOT EXISTS `location_master` (
   `location_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dist_code` varchar(5) NOT NULL,
+  `district_code` varchar(5) NOT NULL,
   `district_name` varchar(20) NOT NULL,
   `state_code` varchar(5) NOT NULL,
   `state_name` varchar(20) NOT NULL,
@@ -93,16 +106,20 @@ CREATE TABLE IF NOT EXISTS `location_master` (
   `update_user` varchar(50) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.location_master: ~0 rows (approximately)
+-- Dumping data for table cactusschool_admin.location_master: ~3 rows (approximately)
 /*!40000 ALTER TABLE `location_master` DISABLE KEYS */;
+INSERT INTO `location_master` (`location_id`, `district_code`, `district_name`, `state_code`, `state_name`, `country_code`, `country_name`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, 'HLY', 'Hooghly', 'WB', 'West Bengal', 'IN', 'India', NULL, NULL, 'ashish', '2019-02-03 19:59:54', NULL, NULL),
+	(2, 'KOL', 'Kolkata', 'WB', 'West Bengal', 'IN', 'India', NULL, NULL, 'ashish', '2019-02-03 20:00:47', NULL, NULL),
+	(3, 'BLR', 'Bangalore', 'KA', 'Karnataka', 'IN', 'India', NULL, NULL, 'ashish', '2019-02-03 20:00:39', NULL, NULL);
 /*!40000 ALTER TABLE `location_master` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.modules_permission
 DROP TABLE IF EXISTS `modules_permission`;
 CREATE TABLE IF NOT EXISTS `modules_permission` (
-  `school_module_id` int(11) NOT NULL AUTO_INCREMENT,
+  `module_permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `school_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `module_id` int(11) NOT NULL,
@@ -112,17 +129,36 @@ CREATE TABLE IF NOT EXISTS `modules_permission` (
   `create_date` timestamp NULL DEFAULT NULL,
   `update_user` varchar(50) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`school_module_id`),
+  PRIMARY KEY (`module_permission_id`),
   KEY `FK_modules_permission_school_master` (`school_id`),
   KEY `FK_modules_permission_users` (`user_id`),
   KEY `FK_modules_permission_module_master` (`module_id`),
   CONSTRAINT `FK_modules_permission_module_master` FOREIGN KEY (`module_id`) REFERENCES `module_master` (`module_id`),
   CONSTRAINT `FK_modules_permission_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
   CONSTRAINT `FK_modules_permission_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.modules_permission: ~0 rows (approximately)
+-- Dumping data for table cactusschool_admin.modules_permission: ~18 rows (approximately)
 /*!40000 ALTER TABLE `modules_permission` DISABLE KEYS */;
+INSERT INTO `modules_permission` (`module_permission_id`, `school_id`, `user_id`, `module_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, 1, NULL, 1, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(2, 1, NULL, 2, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(3, 1, NULL, 3, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(4, 1, NULL, 1, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(5, 1, NULL, 2, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(6, 1, NULL, 3, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(7, 1, NULL, 1, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(8, 1, NULL, 2, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(9, 1, NULL, 3, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(10, 1, NULL, 1, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(11, 1, NULL, 2, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(12, 1, NULL, 3, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(19, 1, NULL, 1, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(20, 1, NULL, 2, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(21, 1, NULL, 3, 'Y', 'Other modules are updated. So deleting old modules', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(22, 1, NULL, 1, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(23, 1, NULL, 2, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(24, 1, NULL, 3, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
 /*!40000 ALTER TABLE `modules_permission` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.module_master
@@ -139,10 +175,15 @@ CREATE TABLE IF NOT EXISTS `module_master` (
   `update_user` varchar(50) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`module_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.module_master: ~0 rows (approximately)
+-- Dumping data for table cactusschool_admin.module_master: ~4 rows (approximately)
 /*!40000 ALTER TABLE `module_master` DISABLE KEYS */;
+INSERT INTO `module_master` (`module_id`, `module_name`, `module_feature`, `description`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, 'NOTICE', 'VIEW_NOTICE', 'View Notices', NULL, NULL, 'ashish', '2019-02-03 20:56:00', NULL, NULL),
+	(2, 'NOTICE', 'ADD_NOTICE', 'Add Notice', NULL, NULL, 'ashish', '2019-02-03 20:56:38', NULL, NULL),
+	(3, 'NOTICE', 'UPDATE_NOTICE', 'Update Notice', NULL, NULL, 'ashish', '2019-02-03 20:56:38', NULL, NULL),
+	(4, 'NOTICE', 'DELETE_NOTICE', 'Update Notice', NULL, NULL, 'ashish', '2019-02-03 20:56:38', NULL, NULL);
 /*!40000 ALTER TABLE `module_master` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.role_access
@@ -220,17 +261,18 @@ CREATE TABLE IF NOT EXISTS `school_master` (
   `update_user` varchar(100) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.school_master: ~6 rows (approximately)
+-- Dumping data for table cactusschool_admin.school_master: ~7 rows (approximately)
 /*!40000 ALTER TABLE `school_master` DISABLE KEYS */;
 INSERT INTO `school_master` (`school_id`, `school_parent_id`, `school_group_name`, `school_name`, `address_id`, `context_root`, `db_name`, `school_code`, `sms_sender_id`, `contract_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
-	(1, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(1, 0, '', 'Test', 34, 'test', 'test3', '100110', 'TEST', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(2, 0, '', 'Test', 1, 'test', 'test2', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(3, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(4, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(6, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(7, 0, '', 'Test', 0, 'test', 'test', '100101', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL);
+	(7, 0, '', 'Test', 0, 'test', 'test', '100101', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(8, 0, '', 'Test', 2, 'test', 'test3', '100110', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `school_master` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.school_users

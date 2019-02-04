@@ -34,7 +34,7 @@ public class Address implements Serializable {
 	@Column(name="address_line3", length=75)
 	private String addressLine3;
 
-	@Column(name="address_name", nullable=false, length=100)
+	@Column(name="address_name", length=100)
 	private String addressName;
 
 	@Column(length=100)
@@ -72,12 +72,12 @@ public class Address implements Serializable {
 
 	//bi-directional many-to-one association to SchoolMaster
 	@ManyToOne
-	@JoinColumn(name="school_id", nullable=false)
+	@JoinColumn(name="school_id")
 	private SchoolMaster schoolMaster;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public Address() {
@@ -225,6 +225,20 @@ public class Address implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", addressLine1="
+				+ addressLine1 + ", addressLine2=" + addressLine2
+				+ ", addressLine3=" + addressLine3 + ", addressName="
+				+ addressName + ", city=" + city + ", countryCode="
+				+ countryCode + ", createDate=" + createDate + ", createUser="
+				+ createUser + ", deleteInd=" + deleteInd + ", deleteReason="
+				+ deleteReason + ", distCode=" + distCode + ", pinCode="
+				+ pinCode + ", stateCode=" + stateCode + ", updateDate="
+				+ updateDate + ", updateUser=" + updateUser + ", schoolMaster="
+				+ schoolMaster + ", user=" + user + "]";
 	}
 
 }

@@ -5,16 +5,16 @@ import io.swagger.annotations.ApiModelProperty;
 public class ModuleDetails {
 	@ApiModelProperty(position=1, value="")
 	private int moduleId;
+	
 	@ApiModelProperty(position=2, value="")
 	private String moduleName;
+	
 	@ApiModelProperty(position=3, value="")
 	private String moduleFeature;
+	
 	@ApiModelProperty(position=4, value="")
 	private String description;
-	@ApiModelProperty(position=5, value="")
-	private DeleteDetails deleteDetails;
-	@ApiModelProperty(position=6, value="")
-	private AuditDetails auditDetails;
+
 	public int getModuleId() {
 		return moduleId;
 	}
@@ -38,17 +38,5 @@ public class ModuleDetails {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public DeleteDetails getDeleteDetails() {
-		return deleteDetails;
-	}
-	public void setDeleteDetails(DeleteDetails deleteDetails) {
-		this.deleteDetails = deleteDetails;
-	}
-	public AuditDetails getAuditDetails() {
-		return auditDetails;
-	}
-	public void setAuditDetails(AuditDetails auditDetails) {
-		this.auditDetails = auditDetails;
 	}
 }

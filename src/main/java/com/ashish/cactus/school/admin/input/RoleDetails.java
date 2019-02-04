@@ -1,13 +1,20 @@
 package com.ashish.cactus.school.admin.input;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.EnumSet;
 
 public class RoleDetails {
+	@ApiModelProperty(position=1, value="")
 	private int roleId;
+	
+	@ApiModelProperty(position=2, value="")
 	private String roleName;
+	
+	@ApiModelProperty(position=3, value="")
 	private String roleDescription;
-	private DeleteDetails deleteDetails;
-	private AuditDetails auditDetails;
+	
+	@ApiModelProperty(position=4, value="")
 	private EnumSet<PermissionEnum> permissions;
 	
 	public int getRoleId() {
@@ -27,18 +34,6 @@ public class RoleDetails {
 	}
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
-	}
-	public DeleteDetails getDeleteDetails() {
-		return deleteDetails;
-	}
-	public void setDeleteDetails(DeleteDetails deleteDetails) {
-		this.deleteDetails = deleteDetails;
-	}
-	public AuditDetails getAuditDetails() {
-		return auditDetails;
-	}
-	public void setAuditDetails(AuditDetails auditDetails) {
-		this.auditDetails = auditDetails;
 	}
 	public EnumSet<PermissionEnum> getPermissions() {
 		return permissions;

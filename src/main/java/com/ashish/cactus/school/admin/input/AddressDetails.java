@@ -5,24 +5,31 @@ import io.swagger.annotations.ApiModelProperty;
 public class AddressDetails {
 	@ApiModelProperty(position=1, value="")
 	private int addressId;
+	
 	@ApiModelProperty(position=2, value="")
 	private String addressLine1;
+	
 	@ApiModelProperty(position=3, value="")
 	private String addressLine2;
+	
 	@ApiModelProperty(position=4, value="")
 	private String addressLine3;
+	
 	@ApiModelProperty(position=5, value="")
 	private String city;
+	
 	@ApiModelProperty(position=6, value="")
-	private String distCode;
+	private String pinCode;
+	
 	@ApiModelProperty(position=7, value="")
-	private String stateCode;
+	private String distCode;
+	
 	@ApiModelProperty(position=8, value="")
-	private String countryCode;
+	private String stateCode;
+	
 	@ApiModelProperty(position=9, value="")
-	private DeleteDetails deleteDetails;
-	@ApiModelProperty(position=10, value="")
-	private AuditDetails auditDetails;
+	private String countryCode;
+	
 	public int getAddressId() {
 		return addressId;
 	}
@@ -71,16 +78,10 @@ public class AddressDetails {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	public DeleteDetails getDeleteDetails() {
-		return deleteDetails;
+	public String getPinCode() {
+		return pinCode;
 	}
-	public void setDeleteDetails(DeleteDetails deleteDetails) {
-		this.deleteDetails = deleteDetails;
-	}
-	public AuditDetails getAuditDetails() {
-		return auditDetails;
-	}
-	public void setAuditDetails(AuditDetails auditDetails) {
-		this.auditDetails = auditDetails;
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
 	}
 }

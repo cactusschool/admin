@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
+import com.ashish.cactus.school.admin.db.model.ModuleMaster;
+import com.ashish.cactus.school.admin.input.ModuleDetails;
 import com.ashish.cactus.school.admin.input.SchoolDetails;
 import com.ashish.cactus.school.admin.input.UserDetails;
 
@@ -20,7 +22,10 @@ public class AdminOutput {
 	@ApiModelProperty(position=4, value="List of locations: District, State, Country")
 	private List<LocationDetails> locations; 
 	
-	@ApiModelProperty(position=5, value="The error in the response will be captured")
+	@ApiModelProperty(position=5, value="List of modules")
+	private List<ModuleDetails> modules; 
+	
+	@ApiModelProperty(position=6, value="The error in the response will be captured")
 	private Error error;
 
 	public SchoolDetails getSchoolDetails() {
@@ -61,5 +66,13 @@ public class AdminOutput {
 
 	public void setLocations(List<LocationDetails> locations) {
 		this.locations = locations;
+	}
+
+	public List<ModuleDetails> getModules() {
+		return modules;
+	}
+
+	public void setModules(List<ModuleDetails> modules) {
+		this.modules = modules;
 	}
 }

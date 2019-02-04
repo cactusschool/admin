@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.ashish.cactus.school.admin.db.model.User;
 
 @Component
-public interface AdminUserRepository extends CrudRepository <User, Long>{
+public interface AdminUserRepository extends CrudRepository <User, Integer>{
 
 	User findByUserName(String username);
 }

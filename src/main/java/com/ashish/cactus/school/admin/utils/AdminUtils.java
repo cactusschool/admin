@@ -1,8 +1,12 @@
 package com.ashish.cactus.school.admin.utils;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Component;
 
+import com.ashish.cactus.school.admin.input.AdminInput;
 import com.ashish.cactus.school.admin.output.AdminOutput;
 
 @Component
@@ -14,5 +18,14 @@ public class AdminUtils {
 		error.setErrorCode(errorCode);
 		error.setErrorDesc(e.getMessage());
 		error.setDeveloperMsg(ExceptionUtils.getStackTrace(e));
+	}
+	
+	public void mapAuditFieldsAndDeleteDetails (AdminInput adminInput, Object dest) throws IllegalAccessException, InvocationTargetException {
+		if(adminInput.getAuditDetails() != null && dest != null) {
+			BeanUtils.copyProperties(dest, adminInput.getAuditDetails());
+		}
+		if(adminInput.getDeleteDetails() != null && dest != null) {
+			BeanUtils.copyProperties(dest, adminInput.getDeleteDetails());
+		}
 	}
 }

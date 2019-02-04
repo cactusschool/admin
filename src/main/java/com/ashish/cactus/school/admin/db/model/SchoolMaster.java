@@ -88,9 +88,9 @@ public class SchoolMaster implements Serializable {
 	private List<SchoolUser> schoolUsers;
 
 	//bi-directional many-to-one association to ModulesPermission
-	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.EAGER)
 	private List<ModulesPermission> modulesPermissions;
-		
+	
 	public SchoolMaster() {
 	}
 
@@ -286,5 +286,21 @@ public class SchoolMaster implements Serializable {
 		modulesPermission.setSchoolMaster(null);
 
 		return modulesPermission;
+	}
+
+	@Override
+	public String toString() {
+		return "SchoolMaster [schoolId=" + schoolId + ", addressId="
+				+ addressId + ", contextRoot=" + contextRoot + ", contractId="
+				+ contractId + ", createDate=" + createDate + ", createUser="
+				+ createUser + ", dbName=" + dbName + ", deleteInd="
+				+ deleteInd + ", deleteReason=" + deleteReason
+				+ ", schoolCode=" + schoolCode + ", schoolGroupName="
+				+ schoolGroupName + ", schoolName=" + schoolName
+				+ ", schoolParentId=" + schoolParentId + ", smsSenderId="
+				+ smsSenderId + ", updateDate=" + updateDate + ", updateUser="
+				+ updateUser + ", addresses=" + addresses + ", schoolUsers="
+				+ schoolUsers + ", modulesPermissions=" + modulesPermissions
+				+ "]";
 	}
 }

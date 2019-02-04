@@ -7,31 +7,39 @@ import io.swagger.annotations.ApiModelProperty;
 public class SchoolDetails {
 	@ApiModelProperty(position=1, value="")
 	private int schoolId;
+	
 	@ApiModelProperty(position=2, value="")
 	private int schoolParentId;
+	
 	@ApiModelProperty(position=3, value="")
 	private String schoolName;
+	
 	@ApiModelProperty(position=4, value="")
 	private String schoolGroupName;
+	
 	@ApiModelProperty(position=5, value="")
 	private String dbName;
+	
 	@ApiModelProperty(position=6, value="")
 	private String contextRoot;
+	
 	@ApiModelProperty(position=7, value="")
 	private String schoolCode;
+	
 	@ApiModelProperty(position=8, value="")
 	private String smsSenderId;
+	
 	@ApiModelProperty(position=9, value="")
 	private AddressDetails addressDetails;
+	
 	@ApiModelProperty(position=10, value="")
 	private List<UserDetails> users;
+	
 	@ApiModelProperty(position=11, value="")
 	private List<ModuleDetails> modules;
-	@ApiModelProperty(position=12, value="")
-	private DeleteDetails deleteDetails;
-	@ApiModelProperty(position=13, value="")
-	private AuditDetails auditDetails;
 	
+	@ApiModelProperty(position=12, value="")
+	private LicenseDetails licenseDetails;
 	
 	public String getSchoolName() {
 		return schoolName;
@@ -87,18 +95,6 @@ public class SchoolDetails {
 	public void setAddressDetails(AddressDetails addressDetails) {
 		this.addressDetails = addressDetails;
 	}
-	public DeleteDetails getDeleteDetails() {
-		return deleteDetails;
-	}
-	public void setDeleteDetails(DeleteDetails deleteDetails) {
-		this.deleteDetails = deleteDetails;
-	}
-	public AuditDetails getAuditDetails() {
-		return auditDetails;
-	}
-	public void setAuditDetails(AuditDetails auditDetails) {
-		this.auditDetails = auditDetails;
-	}
 	public List<UserDetails> getUsers() {
 		return users;
 	}
@@ -110,5 +106,21 @@ public class SchoolDetails {
 	}
 	public void setModules(List<ModuleDetails> modules) {
 		this.modules = modules;
+	}
+	public LicenseDetails getLicenseDetails() {
+		return licenseDetails;
+	}
+	public void setLicenseDetails(LicenseDetails licenseDetails) {
+		this.licenseDetails = licenseDetails;
+	}
+	@Override
+	public String toString() {
+		return "SchoolDetails [schoolId=" + schoolId + ", schoolParentId="
+				+ schoolParentId + ", schoolName=" + schoolName
+				+ ", schoolGroupName=" + schoolGroupName + ", dbName=" + dbName
+				+ ", contextRoot=" + contextRoot + ", schoolCode=" + schoolCode
+				+ ", smsSenderId=" + smsSenderId + ", addressDetails="
+				+ addressDetails + ", users=" + users + ", modules=" + modules
+				+ ", licenseDetails=" + licenseDetails + "]";
 	}
 }

@@ -1,12 +1,9 @@
 package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import org.hibernate.annotations.Where;
-
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -16,14 +13,13 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="modules_permission")
 @NamedQuery(name="ModulesPermission.findAll", query="SELECT m FROM ModulesPermission m")
-@Where(clause="delete_ind is NULL or delete_ind='N'")
 public class ModulesPermission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="school_module_id", unique=true, nullable=false)
-	private int schoolModuleId;
+	@Column(name="module_permission_id", unique=true, nullable=false)
+	private int modulePermissionId;
 
 	@Column(name="create_date")
 	private Timestamp createDate;
@@ -61,12 +57,12 @@ public class ModulesPermission implements Serializable {
 	public ModulesPermission() {
 	}
 
-	public int getSchoolModuleId() {
-		return this.schoolModuleId;
+	public int getModulePermissionId() {
+		return this.modulePermissionId;
 	}
 
-	public void setSchoolModuleId(int schoolModuleId) {
-		this.schoolModuleId = schoolModuleId;
+	public void setModulePermissionId(int modulePermissionId) {
+		this.modulePermissionId = modulePermissionId;
 	}
 
 	public Timestamp getCreateDate() {
