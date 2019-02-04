@@ -10,11 +10,11 @@ public class AuditDetails {
 	@ApiModelProperty(position=1, value="")
 	private String createUser;
 	
-	@ApiModelProperty(position=2, value="")
+	@ApiModelProperty(position=2, value="yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	
-	@ApiModelProperty(position=3, value="")
+	@ApiModelProperty(position=3, value="yyyy-MM-dd HH:mm:ss")
 	private String updateUser;
 	
 	@ApiModelProperty(position=4, value="")

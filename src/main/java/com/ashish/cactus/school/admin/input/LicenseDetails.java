@@ -4,50 +4,32 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class LicenseDetails {
 	@ApiModelProperty(position=1, value="")
-	private int linceseId;
+	private int licenseId;
 	
 	@ApiModelProperty(position=2, value="")
-	private int schoolId;
-	
-	@ApiModelProperty(position=3, value="")
-	private int userId;
-	
-	@ApiModelProperty(position=4, value="")
 	private String paymentNeeded;
 	
-	@ApiModelProperty(position=5, value="")
+	@ApiModelProperty(position=3, value="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date startDate;
 	
-	@ApiModelProperty(position=6, value="")
+	@ApiModelProperty(position=4, value="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endDate;
 	
-	@ApiModelProperty(position=7, value="")
+	@ApiModelProperty(position=5, value="")
 	private Double subscrptionFees;
 
-	public int getLinceseId() {
-		return linceseId;
+	public int getLicenseId() {
+		return licenseId;
 	}
 
-	public void setLinceseId(int linceseId) {
-		this.linceseId = linceseId;
-	}
-
-	public int getSchoolId() {
-		return schoolId;
-	}
-
-	public void setSchoolId(int schoolId) {
-		this.schoolId = schoolId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setLicenseId(int licenseId) {
+		this.licenseId = licenseId;
 	}
 
 	public String getPaymentNeeded() {

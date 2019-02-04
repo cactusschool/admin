@@ -7,16 +7,19 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ashish.cactus.school.admin.db.model.Address;
+import com.ashish.cactus.school.admin.db.model.LicenseDetail;
 import com.ashish.cactus.school.admin.db.model.ModuleMaster;
 import com.ashish.cactus.school.admin.db.model.ModulesPermission;
 import com.ashish.cactus.school.admin.db.model.SchoolMaster;
 import com.ashish.cactus.school.admin.db.repositories.AddressRepository;
+import com.ashish.cactus.school.admin.db.repositories.LicenseDetailRepository;
 import com.ashish.cactus.school.admin.db.repositories.ModuleMasterRepository;
 import com.ashish.cactus.school.admin.db.repositories.ModulePermissionRepository;
 import com.ashish.cactus.school.admin.db.repositories.SchoolMasterRepository;
@@ -24,6 +27,7 @@ import com.ashish.cactus.school.admin.dozer.mappers.AddressDetailsMappers;
 import com.ashish.cactus.school.admin.dozer.mappers.SchoolDetailsMappers;
 import com.ashish.cactus.school.admin.input.AddressDetails;
 import com.ashish.cactus.school.admin.input.AdminInput;
+import com.ashish.cactus.school.admin.input.LicenseDetails;
 import com.ashish.cactus.school.admin.input.ModuleDetails;
 import com.ashish.cactus.school.admin.input.SchoolDetails;
 import com.ashish.cactus.school.admin.output.AdminOutput;
@@ -50,6 +54,9 @@ public class SchoolService {
 	private AddressRepository addressRepo;
 	
 	@Autowired
+	private LicenseDetailRepository licenseDetailRepo;
+	
+	@Autowired
 	private ModuleMasterRepository moduleMaserRepo;
 	
 	@Autowired
@@ -62,6 +69,7 @@ public class SchoolService {
 		}
 		SchoolMaster schoolMaster = new SchoolMaster();
 		Address address = null;
+		LicenseDetail licenseEntity = null;
 		List<ModuleDetails> modules = new ArrayList<>();
 		try {
 			validateSchoolInput(adminInput);
@@ -135,6 +143,43 @@ public class SchoolService {
 				modulePermissionRepo.saveAll(modulePermissions);
 				logger.debug("Module permossions added for school: " + schoolMaster);
 			}
+			
+			
+			// Update license details ========================================================
+			if(adminInput.getSchoolDetails() != null && adminInput.getSchoolDetails().getLicenseDetails() != null) {
+				logger.debug("License needs to be saved");
+				LicenseDetails licenseBean = adminInput.getSchoolDetails().getLicenseDetails();
+				if(licenseBean != null) {
+					if(adminInput.getSchoolDetails().getSchoolId() > 0 ) {
+						// Delete other licenses
+						if(licenseBean.getLicenseId() == 0) {
+							Optional<SchoolMaster> s = schoolMasterRepo.findById(adminInput.getSchoolDetails().getSchoolId());
+							if(s.isPresent()) {
+								List<LicenseDetail> licenses = s.get().getLicenseDetails();
+								if(licenses != null) {
+									for(LicenseDetail l: licenses) {
+										l.setDeleteInd("Y");
+										l.setDeleteReason("Updated school license with a new contract");
+										if(adminInput.getAuditDetails() != null) {
+											l.setUpdateUser(adminInput.getAuditDetails().getUpdateUser());
+											if(adminInput.getAuditDetails().getUpdateDate() != null) {
+												l.setUpdateDate(new Timestamp(adminInput.getAuditDetails().getUpdateDate().getTime()));
+											}
+										}
+									}
+								}
+								licenseDetailRepo.saveAll(licenses);
+								logger.debug("Deactivated all previous licenses for the school: ");
+							}
+						}
+						licenseEntity = new LicenseDetail();
+						BeanUtils.copyProperties(licenseEntity, licenseBean);
+						adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, licenseEntity);
+						licenseDetailRepo.save(licenseEntity);
+					}
+				}
+			}
+			
 			schoolDetailsMapper.mapSchoolDetails(adminInput.getSchoolDetails(), schoolMaster);
 			
 			// update address of the school
@@ -142,6 +187,7 @@ public class SchoolService {
 				logger.debug("Address entity is attached with school record. " + address + "\n" + schoolMaster);
 				schoolMaster.setAddressId(address.getAddressId());
 			}
+			
 			adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, schoolMaster);
 			schoolMasterRepo.save(schoolMaster);
 			
@@ -150,6 +196,13 @@ public class SchoolService {
 				address.setSchoolMaster(schoolMaster);
 				adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, address);
 				addressRepo.save(address);
+			}
+			
+			// Update school_id in license details table =====================================
+			if(licenseEntity != null && schoolMaster != null) {
+				licenseEntity.setSchoolMaster(schoolMaster);
+				adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, licenseEntity);
+				licenseDetailRepo.save(licenseEntity);
 			}
 						
 			adminOutput.setSchoolDetails(new SchoolDetails());
@@ -163,6 +216,16 @@ public class SchoolService {
 					logger.debug("Address updated into the response for the school: " + adminOutput.getSchoolDetails());
 				}
 			}
+			
+			if(licenseEntity != null) {
+				LicenseDetails licenseBean = new LicenseDetails();
+				BeanUtils.copyProperties(licenseBean, licenseEntity);
+				if(adminOutput.getSchoolDetails() != null) {
+					adminOutput.getSchoolDetails().setLicenseDetails(licenseBean);
+					logger.debug("License details updated into the response for the school: " + adminOutput.getSchoolDetails());
+				}
+			}
+			
 			adminOutput.getSchoolDetails().setModules(modules);
 		} catch (Exception e) {
 			logger.error("Error while Saving/Updating school data", e);

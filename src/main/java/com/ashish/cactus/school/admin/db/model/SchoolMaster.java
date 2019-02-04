@@ -88,9 +88,13 @@ public class SchoolMaster implements Serializable {
 	private List<SchoolUser> schoolUsers;
 
 	//bi-directional many-to-one association to ModulesPermission
-	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
 	private List<ModulesPermission> modulesPermissions;
 	
+	//bi-directional many-to-one association to LicenseDetail
+	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+	private List<LicenseDetail> licenseDetails;
+		
 	public SchoolMaster() {
 	}
 
@@ -288,6 +292,28 @@ public class SchoolMaster implements Serializable {
 		return modulesPermission;
 	}
 
+	public List<LicenseDetail> getLicenseDetails() {
+		return this.licenseDetails;
+	}
+
+	public void setLicenseDetails(List<LicenseDetail> licenseDetails) {
+		this.licenseDetails = licenseDetails;
+	}
+
+	public LicenseDetail addLicenseDetail(LicenseDetail licenseDetail) {
+		getLicenseDetails().add(licenseDetail);
+		licenseDetail.setSchoolMaster(this);
+
+		return licenseDetail;
+	}
+
+	public LicenseDetail removeLicenseDetail(LicenseDetail licenseDetail) {
+		getLicenseDetails().remove(licenseDetail);
+		licenseDetail.setSchoolMaster(null);
+
+		return licenseDetail;
+	}
+	
 	@Override
 	public String toString() {
 		return "SchoolMaster [schoolId=" + schoolId + ", addressId="
