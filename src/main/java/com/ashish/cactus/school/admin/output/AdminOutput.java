@@ -1,8 +1,8 @@
 package com.ashish.cactus.school.admin.output;
 
-import java.util.List;
-
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 import com.ashish.cactus.school.admin.input.SchoolDetails;
 import com.ashish.cactus.school.admin.input.UserDetails;
@@ -13,10 +13,14 @@ public class AdminOutput {
 	
 	@ApiModelProperty(position=2, value="School details is passed through this object")
 	private SchoolDetails schoolDetails;
+	
 	@ApiModelProperty(position=3, value="User details is passed through this object")
 	private UserDetails userDetails; 
 	
-	@ApiModelProperty(position=4, value="")
+	@ApiModelProperty(position=4, value="List of locations: District, State, Country")
+	private List<LocationDetails> locations; 
+	
+	@ApiModelProperty(position=5, value="The error in the response will be captured")
 	private Error error;
 
 	public SchoolDetails getSchoolDetails() {
@@ -49,5 +53,13 @@ public class AdminOutput {
 
 	public void setError(Error error) {
 		this.error = error;
+	}
+
+	public List<LocationDetails> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<LocationDetails> locations) {
+		this.locations = locations;
 	}
 }

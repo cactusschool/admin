@@ -14,8 +14,8 @@ public class AdminLoggingAspect {
 
 //	@Around("execution(* com.ashish.poc.services..*(..)) || "
 //			+ "execution(* com.ashish.poc.ws..*(..))")
-	@Around("execution(* com.ashish.jwt.token.services.*.*(..)) || "
-			+ "execution(* com.ashish.jwt.token.controller.*.*(..)))")
+	@Around("execution(* com.ashish.cactus.school.admin.services.*.*(..)) || "
+			+ "execution(* com.ashish.cactus.school.admin.controller.*.*(..)))")
 	public Object logAround(ProceedingJoinPoint pjp) throws Throwable {
 		long start = System.currentTimeMillis();
 		logger.debug(">>>>>>>>>>" + pjp.getSignature().toShortString()

@@ -1,7 +1,11 @@
 package com.ashish.cactus.school.admin.db.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.Where;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="module_master")
 @NamedQuery(name="ModuleMaster.findAll", query="SELECT m FROM ModuleMaster m")
+@Where(clause="delete_ind is NULL or delete_ind='N'")
 public class ModuleMaster implements Serializable {
 	private static final long serialVersionUID = 1L;
 

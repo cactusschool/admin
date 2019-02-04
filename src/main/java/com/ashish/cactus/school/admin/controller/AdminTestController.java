@@ -1,4 +1,4 @@
-package com.ashish.cactus.school.admin.test.controller;
+package com.ashish.cactus.school.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,4 +1,4 @@
-package com.ashish.cactus.school.admin.test.controller;
+package com.ashish.cactus.school.admin.controller;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
