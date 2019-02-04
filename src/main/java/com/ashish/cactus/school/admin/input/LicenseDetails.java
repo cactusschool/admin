@@ -22,7 +22,7 @@ public class LicenseDetails {
 	private Date endDate;
 	
 	@ApiModelProperty(position=5, value="")
-	private Double subscrptionFees;
+	private Double subscriptionFees;
 
 	public int getLicenseId() {
 		return licenseId;
@@ -56,11 +56,11 @@ public class LicenseDetails {
 		this.endDate = endDate;
 	}
 
-	public Double getSubscrptionFees() {
-		return subscrptionFees;
+	public Double getSubscriptionFees() {
+		return subscriptionFees;
 	}
 
-	public void setSubscrptionFees(Double subscrptionFees) {
-		this.subscrptionFees = subscrptionFees;
+	public void setSubscriptionFees(Double subscriptionFees) {
+		this.subscriptionFees = subscriptionFees;
 	}
 }
