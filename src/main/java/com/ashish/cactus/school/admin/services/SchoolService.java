@@ -48,7 +48,7 @@ public class SchoolService {
 	private SchoolMasterRepository schoolMasterRepo;
 	
 	@Autowired
-	private ModulePermissionRepository modulePermissionRepo;
+	private ModulePermissionRepository modulesPermissionRepo;
 	
 	@Autowired
 	private AddressRepository addressRepo;
@@ -122,7 +122,7 @@ public class SchoolService {
 							mp.setDeleteInd("Y");
 							mp.setDeleteReason("Other modules are updated. So deleting old modules");
 						}
-						modulePermissionRepo.saveAll(mpList);
+						modulesPermissionRepo.saveAll(mpList);
 						logger.debug("Old modules are deleted for school: ");
 					}
 				}
@@ -140,7 +140,7 @@ public class SchoolService {
 					}
 				}
 				
-				modulePermissionRepo.saveAll(modulePermissions);
+				modulesPermissionRepo.saveAll(modulePermissions);
 				logger.debug("Module permossions added for school: " + schoolMaster);
 			}
 			
@@ -249,5 +249,50 @@ public class SchoolService {
 				throw new Exception("School: " + schoolDetails.getSchoolName() + " has duplicate school code: " + schoolDetails.getSchoolCode());
 			}
 		}
+	}
+	
+	
+	@Transactional(rollbackOn=Exception.class)
+	public AdminOutput getSchool(AdminInput adminInput, AdminOutput adminOutput, String transactionId) throws Exception {
+		if(adminOutput == null) adminOutput = new AdminOutput();
+		adminOutput.setSchoolDetails(new SchoolDetails());
+		
+		SchoolDetails schoolDetails = adminInput.getSchoolDetails();
+		if(schoolDetails != null) {
+			
+			Optional<SchoolMaster> schoolEntity = schoolMasterRepo.findById(schoolDetails.getSchoolId());
+			if(schoolEntity.isPresent()) {
+				schoolDetailsMapper.mapSchoolDetails(schoolEntity.get(), adminOutput.getSchoolDetails());
+				
+				// Find address details =====================
+				logger.debug("Find the address detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
+				for(Address addressEntity: schoolEntity.get().getAddresses()) {
+					AddressDetails addressDetails = new AddressDetails();
+					adminOutput.getSchoolDetails().setAddressDetails(addressDetails);
+					addressDetailsMapper.mapAddressDetails(addressEntity, addressDetails);
+				}
+				
+				// Find module details ======================================
+				logger.debug("Find the module detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
+				List<ModuleDetails> modules = new ArrayList<>();
+				for(ModulesPermission modulesPermissionEntity: schoolEntity.get().getModulesPermissions()) {
+					ModuleDetails moduleDetails = new ModuleDetails();
+					modules.add(moduleDetails);
+					BeanUtils.copyProperties(moduleDetails, modulesPermissionEntity.getModuleMaster());
+					adminOutput.getSchoolDetails().setModules(modules);
+				}
+				
+				// Find contract details =====================
+				logger.debug("Find the license detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
+				for(LicenseDetail licenseEntity: schoolEntity.get().getLicenseDetails()) {
+					LicenseDetails licenseDetailsBean = new LicenseDetails();
+					adminOutput.getSchoolDetails().setLicenseDetails(licenseDetailsBean);
+					BeanUtils.copyProperties(licenseDetailsBean, licenseEntity);
+				}
+			}
+			
+			
+		}
+		return adminOutput;
 	}
 }

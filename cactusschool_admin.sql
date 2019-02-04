@@ -59,7 +59,18 @@ INSERT INTO `address` (`address_id`, `school_id`, `user_id`, `address_name`, `ad
 	(23, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
 	(24, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
 	(33, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
-	(34, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
+	(34, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(35, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(36, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(37, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(38, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(39, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(40, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(41, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(42, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(43, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(44, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', 'Y', 'Updated school address with a new address', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(45, 1, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.license_details
@@ -87,6 +98,15 @@ CREATE TABLE IF NOT EXISTS `license_details` (
 
 -- Dumping data for table cactusschool_admin.license_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `license_details` DISABLE KEYS */;
+INSERT INTO `license_details` (`license_id`, `school_id`, `user_id`, `payment_needed`, `start_date`, `end_date`, `subscription_fees`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(2, NULL, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(3, NULL, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(4, 1, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, 'Y', 'Updated school license with a new contract', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(5, 1, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, 'Y', 'Updated school license with a new contract', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(6, 1, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, 'Y', 'Updated school license with a new contract', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(7, 1, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, 'Y', 'Updated school license with a new contract', 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(8, 1, NULL, 'Y', '2019-02-03 02:58:38', '2021-02-03 02:58:38', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
 /*!40000 ALTER TABLE `license_details` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.location_master
@@ -266,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `school_master` (
 -- Dumping data for table cactusschool_admin.school_master: ~7 rows (approximately)
 /*!40000 ALTER TABLE `school_master` DISABLE KEYS */;
 INSERT INTO `school_master` (`school_id`, `school_parent_id`, `school_group_name`, `school_name`, `address_id`, `context_root`, `db_name`, `school_code`, `sms_sender_id`, `contract_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
-	(1, 0, '', 'Test', 34, 'test', 'test3', '100110', 'TEST', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(1, 0, '', 'Test', 45, 'test', 'test3', '100110', 'TEST', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
 	(2, 0, '', 'Test', 1, 'test', 'test2', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(3, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(4, 0, '', 'Test', 0, 'test', 'test', '100100', 'TEST', 0, NULL, NULL, NULL, NULL, NULL, NULL),
