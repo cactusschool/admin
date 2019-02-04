@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "52957264-1ac7-185f-b314-359b320f5cf8",
+		"name": "CactusSchool",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "OAuth-JWT-ClientCredentials",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YXNoaXNoOmFzaGlzaA=="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/oauth/token?grant_type=client_credentials",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials"
+								}
+							]
+						},
+						"description": "Authorization header should be Basic Base64 of \"ashish:ashish\" where ashish is the client id and client secret in this case.\nBase 64 of ashish:ashish is YXNoaXNoOmFzaGlzaA=="
+					},
+					"response": []
+				},
+				{
+					"name": "OAuth-JWT Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YXNoaXNoOmFzaGlzaA=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "ashish",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "jwtpass",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/oauth/token?grant_type=password",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password"
+								}
+							]
+						},
+						"description": "Authorization header should be Basic Base64 of \"ashish:ashish\" where ashish is the client id and client secret in this case.\nBase 64 of ashish:ashish is YXNoaXNoOmFzaGlzaA=="
+					},
+					"response": []
+				},
+				{
+					"name": "Test-Service-Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/users/admin/ashish",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"users",
+								"admin",
+								"ashish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test-Service-Parent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/users/parent/ashish",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"users",
+								"parent",
+								"ashish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Test-Service-Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/admin/admin/ashish",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"admin",
+								"admin",
+								"ashish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test-Service-Parent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/admin/parent/ashish",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"admin",
+								"parent",
+								"ashish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LocationDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "TransactionId",
+								"value": "1234",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/locations",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModuleDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "TransactionId",
+								"type": "text",
+								"value": "1234"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/modules",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"modules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSchool",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "TransactionId",
+								"value": "123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"schoolDetails\": {\r\n    \"schoolId\": 1\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/get/school",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"get",
+								"school"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateSchool",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "TransactionId",
+								"type": "text",
+								"value": "123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"schoolDetails\": {\r\n    \"schoolId\": 0,\r\n    \"schoolParentId\": 1,\r\n    \"schoolName\": \"Test\",\r\n    \"schoolGroupName\": \"\",\r\n    \"dbName\": \"test3\",\r\n    \"contextRoot\": \"test\",\r\n    \"schoolCode\": \"120290\",\r\n    \"smsSenderId\": \"TEST\",\r\n    \"addressDetails\": {\r\n      \"addressId\": 0,\r\n      \"addressLine1\": \"Queen Palace, Kalipur Check Post\",\r\n      \"addressLine2\": \"Opposite to Hero honda showroom\",\r\n      \"addressLine3\": \"\",\r\n      \"city\": \"Dankuni\",\r\n      \"pinCode\": \"712709\",\r\n      \"countryCode\": \"IND\",\r\n      \"distCode\": \"HLY\",\r\n      \"stateCode\": \"WB\"\r\n    },\r\n    \"licenseDetails\": {\r\n      \"linceseId\": 0,\r\n      \"paymentNeeded\":\"Y\",\r\n      \"startDate\":\"2019-02-03 02:58:38\",\r\n      \"endDate\":\"2021-02-03 02:58:38\",\r\n      \"subscriptionFees\":200.00\r\n    }\r\n  },\r\n   \"deleteDetails\": {\r\n    \"deleteInd\": null,\r\n    \"deleteReason\": null\r\n  },\r\n  \"auditDetails\": {\r\n    \"createDate\": \"2019-02-03 22:58:38\",\r\n    \"createUser\": \"ashish\",\r\n    \"updateDate\": \"2019-02-03 22:58:38\",\r\n    \"updateUser\": \"ashish\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/create/school",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"create",
+								"school"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateSchool With Modules",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "TransactionId",
+								"type": "text",
+								"value": "123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"schoolDetails\": {\r\n    \"schoolId\": 1,\r\n    \"schoolParentId\": 0,\r\n    \"schoolName\": \"Test\",\r\n    \"schoolGroupName\": \"\",\r\n    \"dbName\": \"test3\",\r\n    \"contextRoot\": \"test\",\r\n    \"schoolCode\": \"100110\",\r\n    \"smsSenderId\": \"TEST\",\r\n    \"addressDetails\": {\r\n      \"addressId\": 0,\r\n      \"addressLine1\": \"Queen Palace, Kalipur Check Post\",\r\n      \"addressLine2\": \"Opposite to Hero honda showroom\",\r\n      \"addressLine3\": \"\",\r\n      \"city\": \"Dankuni\",\r\n      \"pinCode\": \"712709\",\r\n      \"countryCode\": \"IND\",\r\n      \"distCode\": \"HLY\",\r\n      \"stateCode\": \"WB\"\r\n    },\r\n    \"modules\": [\r\n      {\r\n        \"moduleId\": 1,\r\n        \"moduleName\": \"NOTICE\",\r\n        \"moduleFeature\": \"NOTICE_VIEW\",\r\n        \"description\": \"Notice view\"\r\n      },\r\n      {\r\n        \"moduleId\": 2,\r\n        \"moduleName\": \"NOTICE\",\r\n        \"moduleFeature\": \"NOTICE_CREATE\",\r\n        \"description\": \"Notice Create\"\r\n      },\r\n      {\r\n        \"moduleId\": 3,\r\n        \"moduleName\": \"NOTICE\",\r\n        \"moduleFeature\": \"NOTICE_UPDATE\",\r\n        \"description\": \"Notice Update\"\r\n      }\r\n    ]\r\n  },\r\n   \"deleteDetails\": {\r\n    \"deleteInd\": null,\r\n    \"deleteReason\": null\r\n  },\r\n  \"auditDetails\": {\r\n    \"createDate\": \"2019-02-03 22:58:38\",\r\n    \"createUser\": \"ashish\",\r\n    \"updateDate\": \"2019-02-03 22:58:38\",\r\n    \"updateUser\": \"ashish\"\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{server}}:7100/admin/create/school",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "7100",
+							"path": [
+								"admin",
+								"create",
+								"school"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

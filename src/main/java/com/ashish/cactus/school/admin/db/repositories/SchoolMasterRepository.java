@@ -10,4 +10,5 @@ import com.ashish.cactus.school.admin.db.model.SchoolMaster;
 @Component
 public interface SchoolMasterRepository extends CrudRepository <SchoolMaster, Integer>{
 	public List<SchoolMaster> findBySchoolCode(String schoolCode);
+	public List<SchoolMaster> findBySchoolParentId(int schoolParentId);
 }

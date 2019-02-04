@@ -1,5 +1,6 @@
 package com.ashish.cactus.school.admin.services;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,9 @@ public class SchoolService {
 		if(adminOutput == null) {
 			adminOutput = new AdminOutput();
 		}
+		adminOutput.setSchools(new ArrayList<>());
+		adminOutput.getSchools().add(new SchoolDetails());
+		
 		SchoolMaster schoolMaster = new SchoolMaster();
 		Address address = null;
 		LicenseDetail licenseEntity = null;
@@ -172,11 +176,11 @@ public class SchoolService {
 								logger.debug("Deactivated all previous licenses for the school: ");
 							}
 						}
-						licenseEntity = new LicenseDetail();
-						BeanUtils.copyProperties(licenseEntity, licenseBean);
-						adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, licenseEntity);
-						licenseDetailRepo.save(licenseEntity);
 					}
+					licenseEntity = new LicenseDetail();
+					BeanUtils.copyProperties(licenseEntity, licenseBean);
+					adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, licenseEntity);
+					licenseDetailRepo.save(licenseEntity);
 				}
 			}
 			
@@ -205,28 +209,29 @@ public class SchoolService {
 				licenseDetailRepo.save(licenseEntity);
 			}
 						
-			adminOutput.setSchoolDetails(new SchoolDetails());
-			schoolDetailsMapper.mapSchoolDetails(schoolMaster, adminOutput.getSchoolDetails());
+//			adminOutput.setSchoolDetails(new SchoolDetails());
+			SchoolDetails schoolDetailsResponseBean = adminOutput.getSchools().get(0);
+			schoolDetailsMapper.mapSchoolDetails(schoolMaster, schoolDetailsResponseBean);
 			
 			if(address != null) {
 				AddressDetails addressDetails = new AddressDetails();
 				addressDetailsMapper.mapAddressDetails(address, addressDetails);
-				if(adminOutput.getSchoolDetails() != null) {
-					adminOutput.getSchoolDetails().setAddressDetails(addressDetails);
-					logger.debug("Address updated into the response for the school: " + adminOutput.getSchoolDetails());
+				if(schoolDetailsResponseBean != null) {
+					schoolDetailsResponseBean.setAddressDetails(addressDetails);
+					logger.debug("Address updated into the response for the school: " + schoolDetailsResponseBean);
 				}
 			}
 			
 			if(licenseEntity != null) {
 				LicenseDetails licenseBean = new LicenseDetails();
 				BeanUtils.copyProperties(licenseBean, licenseEntity);
-				if(adminOutput.getSchoolDetails() != null) {
-					adminOutput.getSchoolDetails().setLicenseDetails(licenseBean);
-					logger.debug("License details updated into the response for the school: " + adminOutput.getSchoolDetails());
+				if(schoolDetailsResponseBean != null) {
+					schoolDetailsResponseBean.setLicenseDetails(licenseBean);
+					logger.debug("License details updated into the response for the school: " + schoolDetailsResponseBean);
 				}
 			}
 			
-			adminOutput.getSchoolDetails().setModules(modules);
+			schoolDetailsResponseBean.setModules(modules);
 		} catch (Exception e) {
 			logger.error("Error while Saving/Updating school data", e);
 			adminUtils.mapError(adminOutput, "407", e);
@@ -254,45 +259,68 @@ public class SchoolService {
 	
 	@Transactional(rollbackOn=Exception.class)
 	public AdminOutput getSchool(AdminInput adminInput, AdminOutput adminOutput, String transactionId) throws Exception {
-		if(adminOutput == null) adminOutput = new AdminOutput();
-		adminOutput.setSchoolDetails(new SchoolDetails());
+		if(adminOutput == null) {
+			adminOutput = new AdminOutput();
+		}
+		
+		adminOutput.setSchools(new ArrayList<>());
 		
 		SchoolDetails schoolDetails = adminInput.getSchoolDetails();
 		if(schoolDetails != null) {
 			
-			Optional<SchoolMaster> schoolEntity = schoolMasterRepo.findById(schoolDetails.getSchoolId());
-			if(schoolEntity.isPresent()) {
-				schoolDetailsMapper.mapSchoolDetails(schoolEntity.get(), adminOutput.getSchoolDetails());
-				
-				// Find address details =====================
-				logger.debug("Find the address detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
-				for(Address addressEntity: schoolEntity.get().getAddresses()) {
-					AddressDetails addressDetails = new AddressDetails();
-					adminOutput.getSchoolDetails().setAddressDetails(addressDetails);
-					addressDetailsMapper.mapAddressDetails(addressEntity, addressDetails);
-				}
-				
-				// Find module details ======================================
-				logger.debug("Find the module detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
-				List<ModuleDetails> modules = new ArrayList<>();
-				for(ModulesPermission modulesPermissionEntity: schoolEntity.get().getModulesPermissions()) {
-					ModuleDetails moduleDetails = new ModuleDetails();
-					modules.add(moduleDetails);
-					BeanUtils.copyProperties(moduleDetails, modulesPermissionEntity.getModuleMaster());
-					adminOutput.getSchoolDetails().setModules(modules);
-				}
-				
-				// Find contract details =====================
-				logger.debug("Find the license detals for the school: " + adminInput.getSchoolDetails().getSchoolId());
-				for(LicenseDetail licenseEntity: schoolEntity.get().getLicenseDetails()) {
-					LicenseDetails licenseDetailsBean = new LicenseDetails();
-					adminOutput.getSchoolDetails().setLicenseDetails(licenseDetailsBean);
-					BeanUtils.copyProperties(licenseDetailsBean, licenseEntity);
+			int schoolId = schoolDetails.getSchoolId();
+			
+			// Retrieve the school details ======================
+			SchoolDetails schooldetailsResponseBean = new SchoolDetails();
+			adminOutput.getSchools().add(schooldetailsResponseBean);
+			getSchoolDetailsBySchoolId(schooldetailsResponseBean, schoolId);
+			
+			
+			// Retrieve the child school details ======================
+			List<SchoolMaster> schools = schoolMasterRepo.findBySchoolParentId(schoolId);
+			if(schools != null && schools.size() > 0) {
+				for(SchoolMaster s: schools) {
+					schooldetailsResponseBean = new SchoolDetails();
+					adminOutput.getSchools().add(schooldetailsResponseBean);
+					getSchoolDetailsBySchoolId(schooldetailsResponseBean, s.getSchoolId());
 				}
 			}
-			
-			
+				
 		}
 		return adminOutput;
+	}
+
+	private void getSchoolDetailsBySchoolId(SchoolDetails schooldetailsResponseBean, int schoolId)
+			throws IllegalAccessException, InvocationTargetException {
+		Optional<SchoolMaster> schoolEntity = schoolMasterRepo.findById(schoolId);
+		if(schoolEntity.isPresent()) {
+			schoolDetailsMapper.mapSchoolDetails(schoolEntity.get(), schooldetailsResponseBean);
+			
+			// Find address details =====================
+			logger.debug("Find the address detals for the school: " + schoolId);
+			for(Address addressEntity: schoolEntity.get().getAddresses()) {
+				AddressDetails addressDetails = new AddressDetails();
+				schooldetailsResponseBean.setAddressDetails(addressDetails);
+				addressDetailsMapper.mapAddressDetails(addressEntity, addressDetails);
+			}
+			
+			// Find module details ======================================
+			logger.debug("Find the module detals for the school: " + schoolId);
+			List<ModuleDetails> modules = new ArrayList<>();
+			for(ModulesPermission modulesPermissionEntity: schoolEntity.get().getModulesPermissions()) {
+				ModuleDetails moduleDetails = new ModuleDetails();
+				modules.add(moduleDetails);
+				BeanUtils.copyProperties(moduleDetails, modulesPermissionEntity.getModuleMaster());
+				schooldetailsResponseBean.setModules(modules);
+			}
+			
+			// Find contract details =====================
+			logger.debug("Find the license detals for the school: " + schoolId);
+			for(LicenseDetail licenseEntity: schoolEntity.get().getLicenseDetails()) {
+				LicenseDetails licenseDetailsBean = new LicenseDetails();
+				schooldetailsResponseBean.setLicenseDetails(licenseDetailsBean);
+				BeanUtils.copyProperties(licenseDetailsBean, licenseEntity);
+			}
+		}
 	}
 }

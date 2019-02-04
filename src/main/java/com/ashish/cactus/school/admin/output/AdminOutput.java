@@ -14,7 +14,7 @@ public class AdminOutput {
 	private String statusCode;
 	
 	@ApiModelProperty(position=2, value="School details is passed through this object")
-	private SchoolDetails schoolDetails;
+	private List<SchoolDetails> schools;
 	
 	@ApiModelProperty(position=3, value="User details is passed through this object")
 	private UserDetails userDetails; 
@@ -28,12 +28,12 @@ public class AdminOutput {
 	@ApiModelProperty(position=6, value="The error in the response will be captured")
 	private Error error;
 
-	public SchoolDetails getSchoolDetails() {
-		return schoolDetails;
+	public List<SchoolDetails> getSchools() {
+		return schools;
 	}
 
-	public void setSchoolDetails(SchoolDetails schoolDetails) {
-		this.schoolDetails = schoolDetails;
+	public void setSchools(List<SchoolDetails> schools) {
+		this.schools = schools;
 	}
 
 	public UserDetails getUserDetails() {
