@@ -19,7 +19,8 @@ public class AdminDozerConfig {
 	    List<String> mappingFiles = Arrays.asList(
 	      "dozer/dozer-global-configuration.xml",
 	      "dozer/dozer-school-map.xml",
-	      "dozer/dozer-address-map.xml"
+	      "dozer/dozer-address-map.xml",
+	      "dozer/dozer-user-map.xml"
 	    );
 	
 	    Map<String, CustomConverter> customConverters = new HashMap<>();

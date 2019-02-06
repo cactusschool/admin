@@ -2,9 +2,9 @@ package com.ashish.cactus.school.admin.output;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.ashish.cactus.school.admin.db.model.ModuleMaster;
 import com.ashish.cactus.school.admin.input.ModuleDetails;
 import com.ashish.cactus.school.admin.input.SchoolDetails;
 import com.ashish.cactus.school.admin.input.UserDetails;
@@ -17,7 +17,7 @@ public class AdminOutput {
 	private List<SchoolDetails> schools;
 	
 	@ApiModelProperty(position=3, value="User details is passed through this object")
-	private UserDetails userDetails; 
+	private List<UserDetails> users; 
 	
 	@ApiModelProperty(position=4, value="List of locations: District, State, Country")
 	private List<LocationDetails> locations; 
@@ -35,15 +35,17 @@ public class AdminOutput {
 	public void setSchools(List<SchoolDetails> schools) {
 		this.schools = schools;
 	}
-
-	public UserDetails getUserDetails() {
-		return userDetails;
+	public List<UserDetails> getUsers() {
+		if(users == null) {
+			users = new ArrayList<>();
+		}
+		return users;
 	}
 
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetails = userDetails;
+	public void setUsers(List<UserDetails> users) {
+		this.users = users;
 	}
-	
+
 	public String getStatusCode() {
 		return statusCode;
 	}

@@ -25,7 +25,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name="users")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-@Where(clause="delete_ind is NULL or delete_ind='N'")
+@Where(clause="(delete_ind is NULL or delete_ind='N') and (user_approved_ind='Y')")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -79,6 +79,12 @@ public class User implements Serializable {
 	@Column(name="user_name", nullable=false, length=50)
 	private String userName;
 
+	@Column(name="user_approval_comment", length=100)
+	private String userApprovalComment;
+
+	@Column(name="user_approved_ind", length=2)
+	private String userApprovedInd;
+	
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="user", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
 	private List<Address> addresses;
@@ -86,6 +92,10 @@ public class User implements Serializable {
 	//bi-directional many-to-one association to SchoolUser
 	@OneToMany(mappedBy="user")
 	private List<SchoolUser> schoolUsers;
+	
+	//bi-directional many-to-one association to LicenseDetail
+	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
+	private List<LicenseDetail> licenseDetails;
 
 	public User() {
 	}
@@ -262,4 +272,41 @@ public class User implements Serializable {
 		return schoolUser;
 	}
 
+	public String getUserApprovalComment() {
+		return this.userApprovalComment;
+	}
+
+	public void setUserApprovalComment(String userApprovalComment) {
+		this.userApprovalComment = userApprovalComment;
+	}
+
+	public String getUserApprovedInd() {
+		return this.userApprovedInd;
+	}
+
+	public void setUserApprovedInd(String userApprovedInd) {
+		this.userApprovedInd = userApprovedInd;
+	}
+	
+	public List<LicenseDetail> getLicenseDetails() {
+		return this.licenseDetails;
+	}
+
+	public void setLicenseDetails(List<LicenseDetail> licenseDetails) {
+		this.licenseDetails = licenseDetails;
+	}
+
+	public LicenseDetail addLicenseDetail(LicenseDetail licenseDetail) {
+		getLicenseDetails().add(licenseDetail);
+		licenseDetail.setUser(this);
+
+		return licenseDetail;
+	}
+
+	public LicenseDetail removeLicenseDetail(LicenseDetail licenseDetail) {
+		getLicenseDetails().remove(licenseDetail);
+		licenseDetail.setUser(null);
+
+		return licenseDetail;
+	}
 }
