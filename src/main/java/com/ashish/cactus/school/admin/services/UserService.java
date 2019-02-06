@@ -66,8 +66,8 @@ public class UserService {
 		if(adminOutput == null) {
 			adminOutput = new AdminOutput();
 		}
-		adminOutput.setSchools(new ArrayList<>());
-		adminOutput.getSchools().add(new SchoolDetails());
+		adminOutput.setUsers(new ArrayList<>());
+		adminOutput.getUsers().add(new UserDetails());
 		
 		User userEntity = new User();
 		Address address = null;
@@ -78,7 +78,7 @@ public class UserService {
 			// Save address (if address details is passed)
 			if(adminInput.getUserDetails() != null && adminInput.getUserDetails().getAddressDetails() != null) {
 				logger.debug("Address needs to be saved");
-				AddressDetails addressBean = adminInput.getSchoolDetails().getAddressDetails();
+				AddressDetails addressBean = adminInput.getUserDetails().getAddressDetails();
 				if(addressBean != null) {
 					if(adminInput.getUserDetails().getUserId() > 0 ) {
 						// Delete other addresses
@@ -192,7 +192,7 @@ public class UserService {
 	}
 	
 	public void validateUserInput(AdminInput adminInput) throws Exception {
-		if(adminInput == null || adminInput.getSchoolDetails() == null) {
+		if(adminInput == null || adminInput.getUserDetails() == null) {
 			throw new Exception("Input cannot be null to create an user");
 		}
 	}

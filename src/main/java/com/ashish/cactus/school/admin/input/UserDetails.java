@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class UserDetails {
 	@ApiModelProperty(position=1, value="")
 	private int userId;
@@ -31,9 +33,11 @@ public class UserDetails {
 	private String accountLocked;
 	
 	@ApiModelProperty(position=9, value="")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endDate;
 	
 	@ApiModelProperty(position=10, value="")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date lastLoggedIn;
 	
 	@ApiModelProperty(position=11, value="")
