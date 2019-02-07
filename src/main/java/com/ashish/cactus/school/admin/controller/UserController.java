@@ -107,6 +107,7 @@ public AdminOutput getUser(
 	AdminOutput response = new AdminOutput();
 	try {
 		response = userService.getStaff(adminInput, response, transactionId);
+		response.setStatusCode("200");
 	} catch (Exception e) {
 		response.setStatusCode("500");
 		adminUtil.mapError(response, "500", e);

@@ -10,4 +10,5 @@ import com.ashish.cactus.school.admin.db.model.User;
 @Component
 public interface UserRepository extends CrudRepository <User, Integer>{
 	public List<User> findByParentId(int parentId);
+	User findByUserName(String username);
 }

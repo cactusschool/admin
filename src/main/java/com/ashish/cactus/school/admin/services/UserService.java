@@ -12,21 +12,31 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ashish.cactus.school.admin.db.model.Address;
 import com.ashish.cactus.school.admin.db.model.LicenseDetail;
+import com.ashish.cactus.school.admin.db.model.AdminRoleMaster;
+import com.ashish.cactus.school.admin.db.model.SchoolMaster;
+import com.ashish.cactus.school.admin.db.model.SchoolUser;
 import com.ashish.cactus.school.admin.db.model.User;
+import com.ashish.cactus.school.admin.db.model.AdminUserRole;
 import com.ashish.cactus.school.admin.db.repositories.AddressRepository;
 import com.ashish.cactus.school.admin.db.repositories.LicenseDetailRepository;
 import com.ashish.cactus.school.admin.db.repositories.ModuleMasterRepository;
 import com.ashish.cactus.school.admin.db.repositories.ModulePermissionRepository;
+import com.ashish.cactus.school.admin.db.repositories.RoleRepository;
+import com.ashish.cactus.school.admin.db.repositories.SchoolMasterRepository;
+import com.ashish.cactus.school.admin.db.repositories.SchoolUserRepository;
 import com.ashish.cactus.school.admin.db.repositories.UserRepository;
+import com.ashish.cactus.school.admin.db.repositories.UserRoleRepository;
 import com.ashish.cactus.school.admin.dozer.mappers.AddressDetailsMappers;
 import com.ashish.cactus.school.admin.dozer.mappers.UserDetailsMappers;
 import com.ashish.cactus.school.admin.input.AddressDetails;
 import com.ashish.cactus.school.admin.input.AdminInput;
 import com.ashish.cactus.school.admin.input.LicenseDetails;
+import com.ashish.cactus.school.admin.input.RoleDetails;
 import com.ashish.cactus.school.admin.input.SchoolDetails;
 import com.ashish.cactus.school.admin.input.UserDetails;
 import com.ashish.cactus.school.admin.output.AdminOutput;
@@ -60,6 +70,18 @@ public class UserService {
 	
 	@Autowired
 	private AdminUtils adminUtils;
+	
+	@Autowired
+	private RoleRepository roleRepo;
+	
+	@Autowired
+	private UserRoleRepository userRoleRepo;
+	
+	@Autowired
+	private SchoolMasterRepository schoolMasterRepo;
+	
+	@Autowired
+	private SchoolUserRepository schoolUserRepo;
 	
 	@Transactional(rollbackOn=Exception.class)
 	public AdminOutput createStaff(AdminInput adminInput, AdminOutput adminOutput, String transactionId) throws Exception {
@@ -144,7 +166,26 @@ public class UserService {
 				}
 			}
 			
+			// If new user then set the password else retrieve the password and store
+			String password = adminInput.getUserDetails().getPassword();
+			if(adminInput.getUserDetails().isPasswordUpdate()) {
+				if(adminInput.getUserDetails().getUserId() > 0) {
+					Optional<User> u = userRepo.findById(adminInput.getUserDetails().getUserId());
+					if(!u.isPresent()) {
+						throw new Exception("You are trying to update password for the user which does not exists");
+					}
+					password = u.get().getPassword();
+				}
+			}
+			if(adminInput.getUserDetails().getUserId() == 0) {
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				password = encoder.encode(password);
+				userEntity.setUserApprovedInd("Y");
+				userEntity.setUserApprovalComment("Staff creation is auto approved");
+			}
 			userDetailsMapper.mapUserDetails(adminInput.getUserDetails(), userEntity);
+			userEntity.setPassword(password);
+			
 			
 			adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, userEntity);
 			userRepo.save(userEntity);
@@ -183,6 +224,63 @@ public class UserService {
 					logger.debug("License details updated into the response for the user: " + userDetailsResponseBean);
 				}
 			}
+			
+			// Update user role =================================
+			List<RoleDetails> roles = adminInput.getUserDetails().getRoles();
+			List<AdminUserRole> userRoles = new ArrayList<>();
+			if(roles != null) {
+				boolean isPrevRolesDeleted = false;
+				for(RoleDetails roleBean : roles) {
+					if(roleBean.getRoleId() != 0) {
+						if(!isPrevRolesDeleted) {
+							userRoles = userEntity.getUserRoles();
+							if(userRoles != null) {
+								for(AdminUserRole userRole: userRoles) {
+									adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, userRole);
+									userRole.setDeleteInd("Y");
+									userRole.setDeleteReason("Deleting existing roles");
+								}
+								userRoleRepo.deleteAll(userRoles);
+								logger.debug("Existing user roles are deleted");
+								userRoles = new ArrayList<>();
+							}
+							isPrevRolesDeleted = true;
+						}
+						Optional<AdminRoleMaster> roleEntity = roleRepo.findById(roleBean.getRoleId());
+						if(roleEntity.isPresent()) {
+							AdminUserRole userRole = new AdminUserRole();
+							if(userRoles == null) {
+								userRoles = new ArrayList<>();
+							}
+							userRoles.add(userRole);
+							userRole.setRoleMaster(roleEntity.get());
+							userRole.setUser(userEntity);
+							adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, userRole);
+						}
+					}
+				}
+				
+				if(userRoles != null && userRoles.size() > 0) {
+					userRoleRepo.saveAll(userRoles);
+					logger.debug("Updated all user roles for the user: " + userEntity.getUserName());
+				}
+			}
+			
+			// Update school details
+			if(adminInput.getUserDetails().getSchools() != null && adminInput.getUserDetails().getSchools().size() > 0) {
+				SchoolDetails schoolBean = adminInput.getUserDetails().getSchools().get(0);
+				Optional<SchoolMaster> school = schoolMasterRepo.findById(schoolBean.getSchoolId());
+				if(school.isPresent()) {
+					List<SchoolUser> schoolUsers = new ArrayList<>();
+					schoolUsers.add(new SchoolUser());
+					SchoolUser schoolUserEntity = new SchoolUser();
+					schoolUserEntity.setUser(userEntity);
+					schoolUserEntity.setSchoolMaster(school.get());
+					adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, schoolUserEntity);
+					schoolUserRepo.save(schoolUserEntity);
+				}
+				
+			}
 		} catch (Exception e) {
 			logger.error("Error while Saving/Updating school data", e);
 			adminUtils.mapError(adminOutput, "407", e);
@@ -195,6 +293,11 @@ public class UserService {
 		if(adminInput == null || adminInput.getUserDetails() == null) {
 			throw new Exception("Input cannot be null to create an user");
 		}
+		
+		if(adminInput.getUserDetails().isPasswordUpdate() && 
+				(adminInput.getUserDetails().getPassword() == null || adminInput.getUserDetails().getPassword().trim().equals(""))) {
+			throw new Exception("When updating password, the password text must be provided");
+		}
 	}
 	
 	
@@ -204,21 +307,40 @@ public class UserService {
 			adminOutput = new AdminOutput();
 		}
 		
-		adminOutput.setSchools(new ArrayList<>());
+		adminOutput.setUsers(new ArrayList<>());
 		
+		// Get all staffs by school id
+		UserDetails userDetailsResponseBean = new UserDetails();
+		if(adminInput.getSchoolDetails() != null) {
+			int schoolId = adminInput.getSchoolDetails().getSchoolId();
+			if(schoolId > 0) {
+				Optional<SchoolMaster> schoolMasterEntity = schoolMasterRepo.findById(schoolId);
+				if(schoolMasterEntity.isPresent()) {
+					List<SchoolUser> schoolUsers = schoolMasterEntity.get().getSchoolUsers();
+					
+					for(SchoolUser su: schoolUsers) {
+						User u = su.getUser();
+						userDetailsResponseBean = new UserDetails();
+						adminOutput.getUsers().add(userDetailsResponseBean);
+						getUserDetailsByUserId(userDetailsResponseBean, u.getUserId());
+					}
+				}
+			}
+		}
+		
+		// Get Staff by user ID
 		UserDetails userDetails = adminInput.getUserDetails();
 		if(userDetails != null) {
 			
-			int schoolId = userDetails.getUserId();
+			int userId = userDetails.getUserId();
 			
 			// Retrieve the user details ======================
-			UserDetails userDetailsResponseBean = new UserDetails();
 			adminOutput.getUsers().add(userDetailsResponseBean);
-			getUserDetailsByUserId(userDetailsResponseBean, schoolId);
+			getUserDetailsByUserId(userDetailsResponseBean, userId);
 			
 			
 			// Retrieve the child user details ======================
-			List<User> users = userRepo.findByParentId(schoolId);
+			List<User> users = userRepo.findByParentId(userId);
 			if(users != null && users.size() > 0) {
 				for(User u: users) {
 					userDetailsResponseBean = new UserDetails();
@@ -236,6 +358,8 @@ public class UserService {
 		Optional<User> userEntity = userRepo.findById(userId);
 		if(userEntity.isPresent()) {
 			userDetailsMapper.mapUserDetails(userEntity.get(), userDetailsResponseBean);
+			// Reset password to null
+			userDetailsResponseBean.setPassword("");
 			
 			// Find address details =====================
 			logger.debug("Find the address detals for the user: " + userId);

@@ -3,10 +3,8 @@ package com.ashish.cactus.school.admin.db.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
-import com.ashish.cactus.school.admin.db.model.User;
+import com.ashish.cactus.school.admin.db.model.SchoolUser;
 
 @Component
-public interface AdminUserRepository extends CrudRepository <User, Integer>{
-
-	User findByUserName(String username);
+public interface SchoolUserRepository extends CrudRepository <SchoolUser, Integer>{
 }

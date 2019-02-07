@@ -20,6 +20,9 @@ public class UserDetails {
 	@ApiModelProperty(position=4, value="")
 	private String password;
 	
+	@ApiModelProperty(position=4, value="")
+	private boolean isPasswordUpdate;
+	
 	@ApiModelProperty(position=5, value="")
 	private String firstName;
 	
@@ -143,7 +146,12 @@ public class UserDetails {
 	public void setModules(List<ModuleDetails> modules) {
 		this.modules = modules;
 	}
-	
+	public boolean isPasswordUpdate() {
+		return isPasswordUpdate;
+	}
+	public void setPasswordUpdate(boolean isPasswordUpdate) {
+		this.isPasswordUpdate = isPasswordUpdate;
+	}
 	@Override
 	public String toString() {
 		return "UserDetails [userId=" + userId + ", parentId=" + parentId

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 
 
+
 /**
  * The persistent class for the users database table.
  * 
@@ -97,6 +98,10 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="schoolMaster", cascade={CascadeType.REMOVE,CascadeType.MERGE, CascadeType.REFRESH}, fetch=FetchType.LAZY)
 	private List<LicenseDetail> licenseDetails;
 
+	//bi-directional many-to-one association to UserRole
+	@OneToMany(mappedBy="user")
+	private List<AdminUserRole> userRoles;
+		
 	public User() {
 	}
 
@@ -308,5 +313,27 @@ public class User implements Serializable {
 		licenseDetail.setUser(null);
 
 		return licenseDetail;
+	}
+	
+	public List<AdminUserRole> getUserRoles() {
+		return this.userRoles;
+	}
+
+	public void setUserRoles(List<AdminUserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public AdminUserRole addUserRole(AdminUserRole userRole) {
+		getUserRoles().add(userRole);
+		userRole.setUser(this);
+
+		return userRole;
+	}
+
+	public AdminUserRole removeUserRole(AdminUserRole userRole) {
+		getUserRoles().remove(userRole);
+		userRole.setUser(null);
+
+		return userRole;
 	}
 }
