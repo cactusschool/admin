@@ -279,8 +279,10 @@ public class UserService {
 					adminUtils.mapAuditFieldsAndDeleteDetails(adminInput, schoolUserEntity);
 					schoolUserRepo.save(schoolUserEntity);
 				}
-				
 			}
+			
+			// Do not send password back
+			userDetailsResponseBean.setPassword("");
 		} catch (Exception e) {
 			logger.error("Error while Saving/Updating school data", e);
 			adminUtils.mapError(adminOutput, "407", e);
