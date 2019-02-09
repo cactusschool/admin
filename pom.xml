@@ -21,11 +21,11 @@
 
 	<dependencies>
 		<!-- JWT TOKEN START -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.ashish.jwt.token</groupId>
 			<artifactId>cactusschool-login-jwt</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> -->
 		<!-- JWT Token END -->
 		<!-- Mandatory dependency START -->
 		<dependency>
