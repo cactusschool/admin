@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- Host:                         3.17.188.50
+-- Host:                         18.191.242.227
 -- Server version:               10.1.37-MariaDB - Source distribution
 -- Server OS:                    Linux
 -- HeidiSQL Version:             9.4.0.5125
@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `address` (
   KEY `FK_address_users` (`user_id`),
   CONSTRAINT `FK_address_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
   CONSTRAINT `FK_address_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.address: ~24 rows (approximately)
+-- Dumping data for table cactusschool_admin.address: ~33 rows (approximately)
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`address_id`, `school_id`, `user_id`, `address_name`, `address_line1`, `address_line2`, `address_line3`, `city`, `pin_code`, `dist_code`, `state_code`, `country_code`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(2, 8, NULL, NULL, 'Queen Palace, Kalipur Check Post', '', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -74,7 +74,15 @@ INSERT INTO `address` (`address_id`, `school_id`, `user_id`, `address_name`, `ad
 	(46, 9, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
 	(47, 10, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
 	(48, 11, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
-	(53, 12, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38');
+	(53, 12, NULL, NULL, 'Queen Palace, Kalipur Check Post', 'Opposite to Hero honda showroom', '', 'Dankuni', '712709', 'HLY', 'WB', 'IND', NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
+	(57, NULL, 8, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(60, NULL, 11, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(68, NULL, 19, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(69, NULL, 20, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(72, NULL, 23, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(73, NULL, 24, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(74, NULL, 25, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(75, NULL, 26, NULL, 'Line1', 'Line2', 'Line3', 'City', '700000', 'BLR', 'KA', 'IN', 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.license_details
@@ -98,9 +106,9 @@ CREATE TABLE IF NOT EXISTS `license_details` (
   KEY `FK_license_details_users` (`user_id`),
   CONSTRAINT `FK_license_details_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
   CONSTRAINT `FK_license_details_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.license_details: ~8 rows (approximately)
+-- Dumping data for table cactusschool_admin.license_details: ~9 rows (approximately)
 /*!40000 ALTER TABLE `license_details` DISABLE KEYS */;
 INSERT INTO `license_details` (`license_id`, `school_id`, `user_id`, `payment_needed`, `start_date`, `end_date`, `subscription_fees`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
@@ -202,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `module_master` (
   PRIMARY KEY (`module_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.module_master: ~4 rows (approximately)
+-- Dumping data for table cactusschool_admin.module_master: ~3 rows (approximately)
 /*!40000 ALTER TABLE `module_master` DISABLE KEYS */;
 INSERT INTO `module_master` (`module_id`, `module_name`, `module_feature`, `description`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(1, 'NOTICE', 'VIEW_NOTICE', 'View Notices', NULL, NULL, 'ashish', '2019-02-03 20:56:00', NULL, NULL),
@@ -286,9 +294,9 @@ CREATE TABLE IF NOT EXISTS `school_master` (
   `update_user` varchar(100) DEFAULT NULL,
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.school_master: ~8 rows (approximately)
+-- Dumping data for table cactusschool_admin.school_master: ~11 rows (approximately)
 /*!40000 ALTER TABLE `school_master` DISABLE KEYS */;
 INSERT INTO `school_master` (`school_id`, `school_parent_id`, `school_group_name`, `school_name`, `address_id`, `context_root`, `db_name`, `school_code`, `sms_sender_id`, `contract_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(1, 0, '', 'Test', 45, 'test', 'test3', '100110', 'TEST', 0, NULL, NULL, 'ashish', '2019-02-03 22:58:38', 'ashish', '2019-02-03 22:58:38'),
@@ -321,10 +329,14 @@ CREATE TABLE IF NOT EXISTS `school_users` (
   KEY `FK_school_users_users` (`user_id`),
   CONSTRAINT `FK_school_users_school_master` FOREIGN KEY (`school_id`) REFERENCES `school_master` (`school_id`),
   CONSTRAINT `FK_school_users_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.school_users: ~0 rows (approximately)
+-- Dumping data for table cactusschool_admin.school_users: ~2 rows (approximately)
 /*!40000 ALTER TABLE `school_users` DISABLE KEYS */;
+INSERT INTO `school_users` (`school_users_id`, `school_id`, `user_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, 1, 24, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(2, 1, 25, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(3, 1, 26, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25');
 /*!40000 ALTER TABLE `school_users` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.users
@@ -338,6 +350,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(50) DEFAULT NULL,
   `parent_id` int(11) DEFAULT '0' COMMENT 'Parent if of students can be stored here',
   `account_locked` varchar(2) DEFAULT '0',
+  `user_approved_ind` varchar(2) DEFAULT '0',
+  `user_approval_comment` varchar(100) DEFAULT '0',
   `end_date` timestamp NULL DEFAULT NULL COMMENT 'End date null means the user is active else not active',
   `delete_ind` varchar(2) DEFAULT NULL,
   `delete_reason` varchar(100) DEFAULT NULL,
@@ -348,16 +362,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `update_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.users: ~5 rows (approximately)
+-- Dumping data for table cactusschool_admin.users: ~11 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`user_id`, `user_name`, `password`, `first_name`, `middle_name`, `last_name`, `parent_id`, `account_locked`, `end_date`, `delete_ind`, `delete_reason`, `last_logged_in`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
-	(1, 'ashish', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Ashish', 'Kumar', 'Mondal', 0, '0', NULL, NULL, NULL, '2019-01-31 00:47:54', 'ashish', '2019-01-31 00:47:58', NULL, NULL),
-	(2, 'madhurjya', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Madhurjya', NULL, 'Saikia', 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 'rajesh', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Rajesh', NULL, 'Karmakar', 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(4, 'pranab', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Pranab', NULL, NULL, 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(5, 'admin', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Admin', NULL, 'Admin', 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`user_id`, `user_name`, `password`, `first_name`, `middle_name`, `last_name`, `parent_id`, `account_locked`, `user_approved_ind`, `user_approval_comment`, `end_date`, `delete_ind`, `delete_reason`, `last_logged_in`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
+	(1, 'ashish', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Ashish', 'Kumar', 'Mondal', 0, '0', 'Y', '', NULL, NULL, NULL, '2019-01-31 00:47:54', 'ashish', '2019-01-31 00:47:58', NULL, NULL),
+	(2, 'madhurjya', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Madhurjya', NULL, 'Saikia', 0, '0', 'Y', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 'rajesh', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Rajesh', NULL, 'Karmakar', 0, '0', 'Y', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, 'pranab', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Pranab', NULL, NULL, 0, '0', 'Y', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(5, 'admin', '$2a$10$u0pzkxGOPKkq1iufN19OtO/tsT1vq0FI58RUMWYq7nG8bZJBLar3u', 'Admin', NULL, 'Admin', 0, '0', 'Y', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(8, 'ashish1', 'ashish', 'Ashish', 'Kumar', 'Mondal', 0, NULL, NULL, NULL, '2019-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(11, 'ashish2', 'ashish', 'Ashish', 'Kumar', 'Mondal', 0, NULL, NULL, NULL, '2019-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(19, 'ashish3', 'ashish', 'Ashish', 'Kumar', 'Mondal', 0, NULL, NULL, NULL, '2019-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(20, 'ashish4', 'ashish', 'Ashish', 'Kumar', 'Mondal', 0, NULL, 'Y', 'Staff creation auto approved', '2029-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(23, 'ashish5', '$2a$10$tpHUEOMP7W/JOOQtTrNqxuTK/2WNopkzCQEKyeJ7/zgG7r.h9KGg2', 'Ashish', 'Kumar', 'Mondal', 0, NULL, 'Y', 'Staff creation auto approved', '2029-02-09 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(24, 'ashish6', '$2a$10$wShjk5tB5wnCmF0Lj6.EQuU.5Y2L0OH.l0OE.EcPTehtk/4ygCwuq', 'Ashish', 'Kumar', 'Mondal', 0, NULL, 'Y', 'Staff creation is auto approved', '2029-02-05 00:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(25, 'ashish7', '$2a$10$/WFsVit4IfTLTzgfKfLx7uusIzQnUw6Gk1nVYxmA7HUiUmJe8ZUPS', 'Ashish', 'Kumar', 'Mondal', 0, NULL, 'Y', 'Staff creation is auto approved', '2029-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(26, 'ashish8', '$2a$10$emnVUVISv2R1bLBOKAypYepIqUUAYLEAoAgiqnZSYqXxG1zr0aRI6', 'Ashish', 'Kumar', 'Mondal', 0, NULL, 'Y', 'Staff creation is auto approved', '2029-02-05 20:36:25', 'N', 'NONE', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table cactusschool_admin.user_role
@@ -377,13 +399,19 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   KEY `FK__role_master` (`role_id`),
   CONSTRAINT `FK__role_master` FOREIGN KEY (`role_id`) REFERENCES `role_master` (`role_id`),
   CONSTRAINT `FK__users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table cactusschool_admin.user_role: ~2 rows (approximately)
+-- Dumping data for table cactusschool_admin.user_role: ~8 rows (approximately)
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
 INSERT INTO `user_role` (`user_role_id`, `user_id`, `role_id`, `delete_ind`, `delete_reason`, `create_user`, `create_date`, `update_user`, `update_date`) VALUES
 	(1, 1, 1, NULL, NULL, 'ashish', '2019-01-31 03:17:33', NULL, NULL),
-	(2, 3, 4, NULL, NULL, 'ashish', '2019-01-31 03:17:40', NULL, NULL);
+	(2, 3, 4, NULL, NULL, 'ashish', '2019-01-31 03:17:40', NULL, NULL),
+	(3, 19, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(4, 20, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(5, 23, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(6, 24, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(7, 25, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25'),
+	(8, 26, 3, 'N', 'NONE', 'ashish', '2019-02-05 20:36:25', 'ashish', '2019-02-05 20:36:25');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
