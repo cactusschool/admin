@@ -324,7 +324,7 @@ public class UserService {
 						User u = su.getUser();
 						userDetailsResponseBean = new UserDetails();
 						adminOutput.getUsers().add(userDetailsResponseBean);
-						getUserDetailsByUserId(userDetailsResponseBean, u.getUserId());
+						getUserDetailsByUserId(userDetailsResponseBean, u.getUserName());
 					}
 				}
 			}
@@ -335,10 +335,11 @@ public class UserService {
 		if(userDetails != null) {
 			
 			int userId = userDetails.getUserId();
+			String userName = userDetails.getUserName();
 			
 			// Retrieve the user details ======================
 			adminOutput.getUsers().add(userDetailsResponseBean);
-			getUserDetailsByUserId(userDetailsResponseBean, userId);
+			userId = getUserDetailsByUserId(userDetailsResponseBean, userName);
 			
 			
 			// Retrieve the child user details ======================
@@ -347,7 +348,7 @@ public class UserService {
 				for(User u: users) {
 					userDetailsResponseBean = new UserDetails();
 					adminOutput.getUsers().add(userDetailsResponseBean);
-					getUserDetailsByUserId(userDetailsResponseBean, u.getUserId());
+					getUserDetailsByUserId(userDetailsResponseBean, u.getUserName());
 				}
 			}
 				
@@ -355,16 +356,18 @@ public class UserService {
 		return adminOutput;
 	}
 
-	private void getUserDetailsByUserId(UserDetails userDetailsResponseBean, int userId)
+	private int getUserDetailsByUserId(UserDetails userDetailsResponseBean, String userName)
 			throws IllegalAccessException, InvocationTargetException {
-		Optional<User> userEntity = userRepo.findById(userId);
+		int userId = 0;
+		Optional<User> userEntity = userRepo.findByUserName(userName);
 		if(userEntity.isPresent()) {
+			userId = userEntity.get().getUserId();
 			userDetailsMapper.mapUserDetails(userEntity.get(), userDetailsResponseBean);
 			// Reset password to null
 			userDetailsResponseBean.setPassword("");
 			
 			// Find address details =====================
-			logger.debug("Find the address detals for the user: " + userId);
+			logger.debug("Find the address detals for the user: " + userName);
 			for(Address addressEntity: userEntity.get().getAddresses()) {
 				AddressDetails addressDetails = new AddressDetails();
 				userDetailsResponseBean.setAddressDetails(addressDetails);
@@ -372,12 +375,13 @@ public class UserService {
 			}
 			
 			// Find contract details =====================
-			logger.debug("Find the license detals for the user: " + userId);
+			logger.debug("Find the license detals for the user: " + userName);
 			for(LicenseDetail licenseEntity: userEntity.get().getLicenseDetails()) {
 				LicenseDetails licenseDetailsBean = new LicenseDetails();
 				userDetailsResponseBean.setLicenseDetails(licenseDetailsBean);
 				BeanUtils.copyProperties(licenseDetailsBean, licenseEntity);
 			}
 		}
+		return userId;
 	}
 }

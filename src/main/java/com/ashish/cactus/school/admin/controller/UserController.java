@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ashish.cactus.school.admin.input.AdminInput;
 import com.ashish.cactus.school.admin.output.AdminOutput;
-import com.ashish.cactus.school.admin.services.SchoolService;
 import com.ashish.cactus.school.admin.services.UserService;
 import com.ashish.cactus.school.admin.utils.AdminUtils;
 
@@ -101,11 +100,15 @@ public AdminOutput getUser(
 		@RequestHeader(name="Accept", required=true, defaultValue="applicaion/json") final String accept,
 		
 		@ApiParam(value = "Payload to get staff", required=true)
-		@RequestBody AdminInput adminInput
+		@RequestBody AdminInput adminInput,
+		
+		Authentication authentication
 		
 		) {
 	AdminOutput response = new AdminOutput();
 	try {
+		// Set user name
+		adminUtil.setUserDetails(adminInput, authentication);
 		response = userService.getStaff(adminInput, response, transactionId);
 		response.setStatusCode("200");
 	} catch (Exception e) {

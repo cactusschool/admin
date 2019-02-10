@@ -4,9 +4,11 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import com.ashish.cactus.school.admin.input.AdminInput;
+import com.ashish.cactus.school.admin.input.UserDetails;
 import com.ashish.cactus.school.admin.output.AdminOutput;
 
 @Component
@@ -26,6 +28,18 @@ public class AdminUtils {
 		}
 		if(adminInput.getDeleteDetails() != null && dest != null) {
 			BeanUtils.copyProperties(dest, adminInput.getDeleteDetails());
+		}
+	}
+	
+	public void setUserDetails(AdminInput adminInput, Authentication authentication) {
+		if(adminInput == null) {
+			adminInput = new AdminInput();
+		}
+		if(adminInput.getUserDetails() == null) {
+			adminInput.setUserDetails(new UserDetails());
+		}
+		if(authentication != null && authentication.getName() != null) {
+			adminInput.getUserDetails().setUserName(authentication.getName());
 		}
 	}
 }
