@@ -301,6 +301,34 @@ CREATE TABLE IF NOT EXISTS `teacher_master` (
 /*!40000 ALTER TABLE `teacher_master` DISABLE KEYS */;
 /*!40000 ALTER TABLE `teacher_master` ENABLE KEYS */;
 
+-- Dumping structure for table cactusschool_school1_mgmt.teacher_subject
+DROP TABLE IF EXISTS `teacher_subject`;
+CREATE TABLE IF NOT EXISTS `teacher_subject` (
+  `teacher_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `teacher_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `teacher_subject_startdate` date DEFAULT NULL,
+  `teacher_subject_enddate` date DEFAULT NULL,
+  `delete_ind` varchar(50) DEFAULT NULL,
+  `delete_reason` varchar(100) DEFAULT NULL,
+  `create_user` varchar(50) DEFAULT NULL,
+  `create_date` timestamp NULL DEFAULT NULL,
+  `update_user` varchar(50) DEFAULT NULL,
+  `update_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`teacher_subject_id`),
+  KEY `FK_teacher_subject_teacher_master` (`teacher_id`),
+  KEY `FK_teacher_subject_subject_master` (`subject_id`),
+  KEY `FK_teacher_subject_section_master` (`section_id`),
+  CONSTRAINT `FK_teacher_subject_section_master` FOREIGN KEY (`section_id`) REFERENCES `section_master` (`section_id`),
+  CONSTRAINT `FK_teacher_subject_subject_master` FOREIGN KEY (`subject_id`) REFERENCES `subject_master` (`subject_id`),
+  CONSTRAINT `FK_teacher_subject_teacher_master` FOREIGN KEY (`teacher_id`) REFERENCES `teacher_master` (`teacher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table cactusschool_school1_mgmt.teacher_subject: ~0 rows (approximately)
+/*!40000 ALTER TABLE `teacher_subject` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teacher_subject` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
